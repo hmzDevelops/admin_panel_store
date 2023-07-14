@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\admin\content\FAQController;
+use App\Http\Controllers\admin\content\MenuController;
+use App\Http\Controllers\admin\content\PageController;
+use App\Http\Controllers\admin\content\PostController;
 use App\Http\Controllers\admin\market\BrandController;
 use App\Http\Controllers\admin\market\OrderController;
 use App\Http\Controllers\admin\market\StoreController;
@@ -9,15 +13,14 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\admin\market\CommentController;
 use App\Http\Controllers\admin\market\GalleryController;
 use App\Http\Controllers\admin\market\PaymentController;
+
 use App\Http\Controllers\admin\market\ProductController;
 use App\Http\Controllers\Admin\Market\CategoryController;
 use App\Http\Controllers\admin\market\DeliveryController;
 use App\Http\Controllers\admin\market\DiscountController;
-
 use App\Http\Controllers\admin\market\PropertyController;
 use App\Http\Controllers\admin\content\CommentController as ContentCommentController;
 use App\Http\Controllers\admin\content\CategoryController as ContentCategoryController;
-use App\Http\Controllers\admin\content\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -221,11 +224,50 @@ Route::prefix('content')->namespace('Content')->group(function () {
     Route::prefix('faq')->group(function () {
 
         Route::get('/', [FAQController::class, 'index'])->name('admin.content.faq.index');
-        Route::get('/create', [FAQController::class, 'show'])->name('admin.content.faq.show');
+        Route::get('/create', [FAQController::class, 'create'])->name('admin.content.faq.create');
         Route::post('/store', [FAQController::class, 'store'])->name('admin.content.faq.store');
         Route::get('/edit/{id}', [FAQController::class, 'edit'])->name('admin.content.faq.edit');
         Route::put('/update/{id}', [FAQController::class, 'update'])->name('admin.content.faq.update');
         Route::delete('/destroy/{id}', [FAQController::class, 'destroy'])->name('admin.content.faq.destroy');
+
+    });
+
+    //MENU
+    Route::prefix('menu')->group(function () {
+
+        Route::get('/', [MenuController::class, 'index'])->name('admin.content.menu.index');
+        Route::get('/create', [MenuController::class, 'create'])->name('admin.content.menu.create');
+        Route::post('/store', [MenuController::class, 'store'])->name('admin.content.menu.store');
+        Route::get('/edit/{id}', [MenuController::class, 'edit'])->name('admin.content.menu.edit');
+        Route::put('/update/{id}', [MenuController::class, 'update'])->name('admin.content.menu.update');
+        Route::delete('/destroy/{id}', [MenuController::class, 'destroy'])->name('admin.content.menu.destroy');
+
+    });
+
+
+    //PAGE
+    Route::prefix('page')->group(function () {
+
+        Route::get('/', [PageController::class, 'index'])->name('admin.content.page.index');
+        Route::get('/create', [PageController::class, 'create'])->name('admin.content.page.create');
+        Route::post('/store', [PageController::class, 'store'])->name('admin.content.page.store');
+        Route::get('/edit/{id}', [PageController::class, 'edit'])->name('admin.content.page.edit');
+        Route::put('/update/{id}', [PageController::class, 'update'])->name('admin.content.page.update');
+        Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+
+    });
+
+
+
+    //POST
+    Route::prefix('post')->group(function () {
+
+        Route::get('/', [PostController::class, 'index'])->name('admin.content.post.index');
+        Route::get('/create', [PostController::class, 'create'])->name('admin.content.post.create');
+        Route::post('/store', [PostController::class, 'store'])->name('admin.content.post.store');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('admin.content.post.edit');
+        Route::put('/update/{id}', [PostController::class, 'update'])->name('admin.content.post.update');
+        Route::delete('/destroy/{id}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
 
     });
 });

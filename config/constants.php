@@ -24,6 +24,14 @@ return [
         'create_property' => 'ایجاد فرم کالا',
         'store' => 'انبار',
         'add_store' => 'اضافه کردن به انبار',
+        'faq_index' => 'سوالات متداول',
+        'faq_create' => 'ایجاد سوال',
+        'menu_index' => 'منو',
+        'menu_create' => 'ایجاد منو',
+        'page_index' => 'پیج ساز',
+        'page_create' => 'ایجاد پیج',
+        'post_index' => 'پست ها',
+        'post_create' => 'ایجاد پست',
     ]
 ];
 

@@ -26,6 +26,24 @@
             </a>
 
 
+            <a href="{{ route('admin.content.menu.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>منوها</span>
+            </a>
+
+
+            <a href="{{ route('admin.content.post.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>پست ها</span>
+            </a>
+
+
+            <a href="{{ route('admin.content.page.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>پیج ساز</span>
+            </a>
+
+
 {{-- ********************************************************************************************** --}}
 
 
