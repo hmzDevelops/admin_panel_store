@@ -32,6 +32,19 @@ return [
         'page_create' => 'ایجاد پیج',
         'post_index' => 'پست ها',
         'post_create' => 'ایجاد پست',
+        'admin_user_index' => 'کاربران ادمین',
+        'admin_user_create' => 'ایجاد ادمین جدید',
+        'customer_index' => 'مشتریان',
+        'customer_create' => 'ایجاد مشتری جدید',
+        'role_index' => 'نقش ها',
+        'role_create' => 'ایجاد نقش ',
+        'email_index' => 'اطلاعیه ایمیل',
+        'email_create' => 'ایجاد ایمیل',
+        'sms_index' => 'اطلاعیه پیامکی',
+        'sms_create' => 'ایجاد پیامک',
+        'ticket_index' => 'تیکت',
+        'ticket_show' => 'نمایش تیکت',
+        'setting_index' => 'تنظیمات',
     ]
 ];
 

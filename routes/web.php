@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\admin\user\RoleController;
+use App\Http\Controllers\admin\notify\SMSController;
 use App\Http\Controllers\admin\content\FAQController;
 use App\Http\Controllers\admin\content\MenuController;
 use App\Http\Controllers\admin\content\PageController;
@@ -9,16 +11,22 @@ use App\Http\Controllers\admin\content\PostController;
 use App\Http\Controllers\admin\market\BrandController;
 use App\Http\Controllers\admin\market\OrderController;
 use App\Http\Controllers\admin\market\StoreController;
+use App\Http\Controllers\admin\notify\EmailController;
+use App\Http\Controllers\admin\ticket\TicketController;
+
+use App\Http\Controllers\admin\user\CustomerController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\admin\market\CommentController;
 use App\Http\Controllers\admin\market\GalleryController;
 use App\Http\Controllers\admin\market\PaymentController;
-
 use App\Http\Controllers\admin\market\ProductController;
+use App\Http\Controllers\admin\user\AdminUserController;
 use App\Http\Controllers\Admin\Market\CategoryController;
 use App\Http\Controllers\admin\market\DeliveryController;
 use App\Http\Controllers\admin\market\DiscountController;
 use App\Http\Controllers\admin\market\PropertyController;
+use App\Http\Controllers\admin\setting\SettingController;
+use App\Http\Controllers\admin\user\PermissionController;
 use App\Http\Controllers\admin\content\CommentController as ContentCommentController;
 use App\Http\Controllers\admin\content\CategoryController as ContentCategoryController;
 
@@ -272,3 +280,132 @@ Route::prefix('content')->namespace('Content')->group(function () {
     });
 });
 
+//--------------------------------------------------------------------------
+
+
+//USER
+Route::prefix('user')->namespace('User')->group(function () {
+
+    //admin-user
+    Route::prefix('admin-user')->group(function(){
+
+        Route::get('/', [AdminUserController::class, 'index'])->name('admin.user.index');
+        Route::get('/create', [AdminUserController::class, 'create'])->name('admin.user.create');
+        Route::post('/store', [AdminUserController::class, 'store'])->name('admin.user.store');
+        Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+        Route::put('/update/{id}', [AdminUserController::class, 'update'])->name('admin.user.update');
+        Route::delete('/destroy/{id}', [AdminUserController::class, 'destroy'])->name('admin.user.destroy');
+
+    });
+
+     //customer
+     Route::prefix('customer')->group(function(){
+
+        Route::get('/', [CustomerController::class, 'index'])->name('admin.user.customer.index');
+        Route::get('/create', [CustomerController::class, 'create'])->name('admin.user.customer.create');
+        Route::post('/store', [CustomerController::class, 'store'])->name('admin.user.customer.store');
+        Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('admin.user.customer.edit');
+        Route::put('/update/{id}', [CustomerController::class, 'update'])->name('admin.user.customer.update');
+        Route::delete('/destroy/{id}', [CustomerController::class, 'destroy'])->name('admin.user.customer.destroy');
+
+    });
+
+
+    //role
+     Route::prefix('role')->group(function(){
+
+        Route::get('/', [RoleController::class, 'index'])->name('admin.user.role.index');
+        Route::get('/create', [RoleController::class, 'create'])->name('admin.user.role.create');
+        Route::post('/store', [RoleController::class, 'store'])->name('admin.user.role.store');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('admin.user.role.edit');
+        Route::put('/update/{id}', [RoleController::class, 'update'])->name('admin.user.role.update');
+        Route::delete('/destroy/{id}', [RoleController::class, 'destroy'])->name('admin.user.role.destroy');
+
+    });
+
+
+    //permission
+     Route::prefix('permission')->group(function(){
+
+        Route::get('/', [PermissionController::class, 'index'])->name('admin.user.permission.index');
+        Route::get('/create', [PermissionController::class, 'create'])->name('admin.user.permission.create');
+        Route::post('/store', [PermissionController::class, 'store'])->name('admin.user.permission.store');
+        Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('admin.user.permission.edit');
+        Route::put('/update/{id}', [PermissionController::class, 'update'])->name('admin.user.permission.update');
+        Route::delete('/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.user.permission.destroy');
+
+    });
+
+});
+
+//--------------------------------------------------------------------------
+
+//NOTIFY
+Route::prefix('notify')->namespace('Notify')->group(function(){
+
+     //email
+     Route::prefix('email')->group(function(){
+
+        Route::get('/', [EmailController::class, 'index'])->name('admin.notify.email.index');
+        Route::get('/create', [EmailController::class, 'create'])->name('admin.notify.email.create');
+        Route::post('/store', [EmailController::class, 'store'])->name('admin.notify.email.store');
+        Route::get('/edit/{id}', [EmailController::class, 'edit'])->name('admin.notify.email.edit');
+        Route::put('/update/{id}', [EmailController::class, 'update'])->name('admin.notify.email.update');
+        Route::delete('/destroy/{id}', [EmailController::class, 'destroy'])->name('admin.notify.email.destroy');
+
+    });
+
+
+    //sms
+     Route::prefix('sms')->group(function(){
+
+        Route::get('/', [SMSController::class, 'index'])->name('admin.notify.sms.index');
+        Route::get('/create', [SMSController::class, 'create'])->name('admin.notify.sms.create');
+        Route::post('/store', [SMSController::class, 'store'])->name('admin.notify.sms.store');
+        Route::get('/edit/{id}', [SMSController::class, 'edit'])->name('admin.notify.sms.edit');
+        Route::put('/update/{id}', [SMSController::class, 'update'])->name('admin.notify.sms.update');
+        Route::delete('/destroy/{id}', [SMSController::class, 'destroy'])->name('admin.notify.sms.destroy');
+
+    });
+
+
+});
+
+//--------------------------------------------------------------------------
+
+//TICKET
+Route::prefix('ticket')->namespace('Ticket')->group(function(){
+
+        Route::get('/', [TicketController::class, 'index'])->name('admin.ticket.index');
+        Route::get('/new-ticket', [TicketController::class, 'newTicket'])->name('admin.ticket.newTicket');
+        Route::get('/open-ticket', [TicketController::class, 'openTicket'])->name('admin.ticket.openTicket');
+        Route::post('/close-ticket', [TicketController::class, 'closeTicket'])->name('admin.ticket.closeTicket');
+        Route::get('/show', [TicketController::class, 'show'])->name('admin.ticket.show');
+        Route::get('/create', [TicketController::class, 'create'])->name('admin.ticket.create');
+        Route::get('/store', [TicketController::class, 'store'])->name('admin.ticket.store');
+        Route::get('/edit/{id}', [TicketController::class, 'edit'])->name('admin.ticket.edit');
+        Route::put('/update/{id}', [TicketController::class, 'update'])->name('admin.ticket.update');
+        Route::delete('/destroy/{id}', [TicketController::class, 'destroy'])->name('admin.ticket.destroy');
+
+});
+
+//--------------------------------------------------------------------------
+
+
+//SETTING
+Route::prefix('setting')->namespace('Setting')->group(function(){
+
+    Route::get('/', [SettingController::class, 'index'])->name('admin.setting.index');
+    Route::get('/create', [SettingController::class, 'create'])->name('admin.setting.create');
+    Route::get('/store', [SettingController::class, 'store'])->name('admin.setting.store');
+    Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('admin.setting.edit');
+    Route::put('/update/{id}', [SettingController::class, 'update'])->name('admin.setting.update');
+    Route::delete('/destroy/{id}', [SettingController::class, 'destroy'])->name('admin.setting.destroy');
+
+});
+
+
+//error
+Route::fallback(function () {
+    return '<h1>error found page</h1>';
+});
