@@ -404,8 +404,18 @@ Route::prefix('setting')->namespace('Setting')->group(function(){
 
 });
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
 
 //error
 Route::fallback(function () {
-    return '<h1>error found page</h1>';
+    return view('errors.404.index');
 });
