@@ -204,13 +204,15 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 //CONTENT
 Route::prefix('content')->namespace('Content')->group(function () {
 
+    //CATEGORY
     Route::prefix('category')->group(function(){
         Route::get('/', [ContentCategoryController::class, 'index'])->name('admin.content.category.index');
         Route::get('/create', [ContentCategoryController::class, 'create'])->name('admin.content.category.create');
         Route::post('/store', [ContentCategoryController::class, 'store'])->name('admin.content.category.store');
-        Route::get('/edit/{id}', [ContentCategoryController::class, 'edit'])->name('admin.content.category.edit');
-        Route::put('/update/{id}', [ContentCategoryController::class, 'update'])->name('admin.content.category.update');
-        Route::delete('/destroy/{id}', [ContentCategoryController::class, 'destroy'])->name('admin.content.category.destroy');
+        Route::get('/edit/{postCategory}', [ContentCategoryController::class, 'edit'])->name('admin.content.category.edit');
+        Route::put('/update/{postCategory}', [ContentCategoryController::class, 'update'])->name('admin.content.category.update');
+        Route::delete('/destroy/{postCategory}', [ContentCategoryController::class, 'destroy'])->name('admin.content.category.destroy');
+        Route::post('/status/{postCategory}', [ContentCategoryController::class, 'status'])->name('admin.content.category.status');
     });
 
 
@@ -234,9 +236,11 @@ Route::prefix('content')->namespace('Content')->group(function () {
         Route::get('/', [FAQController::class, 'index'])->name('admin.content.faq.index');
         Route::get('/create', [FAQController::class, 'create'])->name('admin.content.faq.create');
         Route::post('/store', [FAQController::class, 'store'])->name('admin.content.faq.store');
-        Route::get('/edit/{id}', [FAQController::class, 'edit'])->name('admin.content.faq.edit');
-        Route::put('/update/{id}', [FAQController::class, 'update'])->name('admin.content.faq.update');
-        Route::delete('/destroy/{id}', [FAQController::class, 'destroy'])->name('admin.content.faq.destroy');
+        Route::get('/edit/{faq}', [FAQController::class, 'edit'])->name('admin.content.faq.edit');
+        Route::put('/update/{faq}', [FAQController::class, 'update'])->name('admin.content.faq.update');
+        Route::delete('/destroy/{faq}', [FAQController::class, 'destroy'])->name('admin.content.faq.destroy');
+        Route::post('/status/{faq}', [FAQController::class, 'status'])->name('admin.content.faq.status');
+        Route::post('/image_upload', [FAQController::class, 'upload'])->name('admin.content.faq.upload');
 
     });
 
@@ -259,9 +263,10 @@ Route::prefix('content')->namespace('Content')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('admin.content.page.index');
         Route::get('/create', [PageController::class, 'create'])->name('admin.content.page.create');
         Route::post('/store', [PageController::class, 'store'])->name('admin.content.page.store');
-        Route::get('/edit/{id}', [PageController::class, 'edit'])->name('admin.content.page.edit');
-        Route::put('/update/{id}', [PageController::class, 'update'])->name('admin.content.page.update');
-        Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+        Route::get('/edit/{page}', [PageController::class, 'edit'])->name('admin.content.page.edit');
+        Route::put('/update/{page}', [PageController::class, 'update'])->name('admin.content.page.update');
+        Route::delete('/destroy/{page}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+        Route::post('/status/{page}', [PageController::class, 'status'])->name('admin.content.page.status');
 
     });
 
@@ -273,9 +278,11 @@ Route::prefix('content')->namespace('Content')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('admin.content.post.index');
         Route::get('/create', [PostController::class, 'create'])->name('admin.content.post.create');
         Route::post('/store', [PostController::class, 'store'])->name('admin.content.post.store');
-        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('admin.content.post.edit');
-        Route::put('/update/{id}', [PostController::class, 'update'])->name('admin.content.post.update');
-        Route::delete('/destroy/{id}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
+        Route::get('/edit/{post}', [PostController::class, 'edit'])->name('admin.content.post.edit');
+        Route::put('/update/{post}', [PostController::class, 'update'])->name('admin.content.post.update');
+        Route::delete('/destroy/{post}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
+        Route::post('/status/{post}', [PostController::class, 'status'])->name('admin.content.post.status');
+        Route::post('/commentable/{post}', [PostController::class, 'commentable'])->name('admin.content.post.commentable');
 
     });
 });
@@ -415,7 +422,7 @@ Route::middleware([
 });
 
 
-//error
+//error when page not found
 Route::fallback(function () {
     return view('errors.404.index');
 });

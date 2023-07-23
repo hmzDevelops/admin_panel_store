@@ -38,6 +38,9 @@
     {{-- add custom js --}}
     @yield('script')
 
+    {{-- add ajax  --}}
+    @yield('ajax')
+
 </body>
 
 

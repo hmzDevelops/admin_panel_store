@@ -95,6 +95,12 @@
                 <span>دسته ها</span>
             </a>
 
+            <a href="{{ route('admin.content.post.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>پست ها</span>
+            </a>
+
+            
             <a href="{{ route('admin.content.comment.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
                 <span>نظرات</span>
@@ -110,12 +116,6 @@
             <a href="{{ route('admin.content.menu.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
                 <span>منوها</span>
-            </a>
-
-
-            <a href="{{ route('admin.content.post.index') }}" class="sidebar-link">
-                <i class="fas fa-bars"></i>
-                <span>پست ها</span>
             </a>
 
 

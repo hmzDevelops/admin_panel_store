@@ -63,3 +63,10 @@
     height: 150px;
 }
 
+.select2-container .select2-search--inline .select2-search__field{
+    font-family: IRANSans !important;
+}
+
+#select_tags::hover{
+    border: 1px solid red !important;
+}

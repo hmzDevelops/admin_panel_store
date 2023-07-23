@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fa',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fa',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ])->toArray(),
 
     /*
