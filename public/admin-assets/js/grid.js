@@ -58,6 +58,7 @@ $(document).ready(function () {
 
     $("#header-comment-toggle").click(function (e) {
         e.stopPropagation();
+
         $("#header-comment").fadeToggle();
 
         if ($("#header-profile").css("display") == "block") {
@@ -70,8 +71,13 @@ $(document).ready(function () {
 
     });
 
+    $("#commentSearchBox").click(function (e) {
+        e.stopPropagation();
+    });
+
     $("#header-profile-toggle").click(function (e) {
         e.stopPropagation();
+
         $("#header-profile").fadeToggle();
 
         if ($("#header-comment").css("display") == "block") {

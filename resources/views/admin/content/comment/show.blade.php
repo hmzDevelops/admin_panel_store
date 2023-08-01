@@ -3,7 +3,7 @@
 
 
 @section('page-title')
-    <title>{{ config('constants.page_title.show_comment'); }}</title>
+    <title>{{ config('constants.page_title.show_comment') }}</title>
 @endsection
 
 
@@ -11,9 +11,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه </a></li>
-            <li class="breadcrumb-item font-size-12"> <a href="#">بخش فروش</a></li>
+            <li class="breadcrumb-item font-size-12"> <a href="#">بخش محتوا</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#"> نظرات </a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> نمایش نظرها </li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> نمایش نظر </li>
         </ol>
     </nav>
 
@@ -23,7 +23,7 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                        نمایش نظرات
+                        نمایش نظر
                     </h5>
                 </section>
 
@@ -33,45 +33,43 @@
 
                 <section class="card mb-3">
                     <section class="card-header text-white bg-custom-yellow">
-                        کامران محمدی - 8541236
+                        {{ $comment->user->fullName }} - {{ $comment->user->id }}
                     </section>
 
                     <section class="card-body">
-                        <h5 class="card-title">کد کالا: 8543435 - یخچال اسنوا : لوازم خانگی</h5>
-                        <p class="card-text">به نظرم یخچال خوبیه فقط در سال اول قابل استفاده است</p>
+                        <h5 class="card-title">کد کالا: {{ $comment->commentable->id }} - نام کالا:
+                            {{ $comment->commentable->title }}</h5>
+                        <p class="card-text">{{ $comment->body }}</p>
                     </section>
                 </section>
 
 
+                @if ($comment->parent_id == null)
+                    <section>
+
+                        <form action="{{ route('admin.content.comment.answer', $comment->id) }}" method="post">
+                            @csrf
+                            <section class="row">
+
+                                <section class="col-12 form-group">
+                                    <label for="">پاسخ ادمین</label>
+                                    <textarea class="form-control form-control-sm" rows="4" name="body"></textarea>
+                                </section>
 
 
+                                <input type="hidden" value="1" name="seen">
 
-
-
-
-
-
-                <section>
-
-                    <form action="" method="">
-                        <section class="row">
-
-                            <section class="col-12 form-group">
-                                <label for="">پاسخ ادمین</label>
-                                <textarea class="form-control form-control-sm" rows="4"></textarea>
+                                <section class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-sm">ثبت</button>
+                                </section>
                             </section>
 
 
+                        </form>
 
-                            <section class="col-12">
-                                <button type="submit" class="btn btn-primary btn-sm">ثبت</button>
-                            </section>
-                        </section>
+                    </section>
+                @endif
 
-
-                    </form>
-
-                </section>
 
 
             </section>

@@ -81,7 +81,7 @@
                 <section id="header-comment" class="header-comment">
 
                     <section class="border-bottom px-4">
-                        <input type="text" class="form-control form-control-sm my-4" placeholder="جستجو ...">
+                        <input type="text" id="commentSearchBox" class="form-control form-control-sm my-4" placeholder="جستجو ...">
                     </section>
 
                     <section class="header-comment-wrapper">

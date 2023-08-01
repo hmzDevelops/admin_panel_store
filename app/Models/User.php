@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Ticket\Ticket;
+use App\Models\Ticket\TicketAdmin;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -17,6 +20,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +28,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
+        'mobile',
         'email',
+        'status',
         'password',
+        'user_type',
+        'activation',
+        'profile_photo_path',
+        'deleted_at',
     ];
 
     /**
@@ -58,4 +69,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    protected $table = "users";
+
+    public function getFullNameAttribute(){
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+
+    public function ticketAdmin(){
+        return $this->hasOne(TicketAdmin::class);
+    }
+
+
+    //تعداد تیکت های هر یوزر
+    public function tickets(){
+        return $this->hasMany(Ticket::class, 'parent_id');
+    }
 }

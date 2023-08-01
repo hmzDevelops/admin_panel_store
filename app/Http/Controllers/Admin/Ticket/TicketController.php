@@ -2,22 +2,37 @@
 
 namespace App\Http\Controllers\admin\ticket;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Ticket\Ticket;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\ticket\TicketRequest;
 
 class TicketController extends Controller
 {
 
+    //تیکت جدید
     public function newTicket(){
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('seen', 0)->get();
+        foreach($tickets as $ticket){
+            $ticket->seen = 1;
+            $ticket->save();
+        }
+        $ticketPageTitle = "تیکت جدید";
+        return view('admin.ticket.index', compact('tickets', 'ticketPageTitle'));
     }
 
+    //تیکت های باز بر اساس فیلد استاتوس
     public function openTicket(){
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('status', 0)->get();
+        $ticketPageTitle = "تیکت های باز";
+        return view('admin.ticket.index', compact('tickets','ticketPageTitle'));
     }
 
+    //تیکت های بسته بر اساس فیلد استاتوس
     public function closeTicket(){
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('status', 1)->get();
+        $ticketPageTitle = "تیکت های بسته";
+        return view('admin.ticket.index',compact('tickets','ticketPageTitle'));
     }
 
 
@@ -26,54 +41,53 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('admin.ticket.index');
+        $tickets = Ticket::all();
+        $ticketPageTitle = "کلیه تیکت ها";
+        return view('admin.ticket.index', compact('tickets','ticketPageTitle'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('admin.ticket.index');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        return view('admin.ticket.index');
-    }
+     public function show(Ticket $ticket){
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        return view('admin.ticket.show');
-    }
+        return view('admin.ticket.show', compact('ticket'));
+     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+     public function answer(TicketRequest $request,Ticket $ticket){
+        $inputs = $request->all();
+
+        $inputs['subject'] = $ticket->subject;
+        $inputs['description'] = $request->description;
+        $inputs['seen'] = 1;
+        $inputs['reference_id'] = $ticket->reference_id;
+        $inputs['user_id'] = 3;
+        $inputs['category_id'] = $ticket->category_id;
+        $inputs['priority_id'] = $ticket->priority_id;
+        $inputs['ticket_id'] = $ticket->id;
+
+
+        Ticket::create($inputs);
+        return redirect()->route('admin.ticket.index')->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید');
+     }
+
+
+    public function change(Ticket $ticket)
     {
-        //
+        $ticket->status = $ticket->status == 0 ? 1 : 0;
+        $result = $ticket->save();
+
+        if ($result) {
+            if ($ticket->status == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
     }
 }

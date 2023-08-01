@@ -78,20 +78,28 @@
 
                                     </td>
 
-                                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
                                     <td>
-                                        <input onchange="changeStatus({{ $post->id }})" id="{{ $post->id }}"
-                                            type="checkbox" @if ($post->status == 1) checked @endif
-                                            data-url="{{ route('admin.content.post.status', $post) }}">
+                                        <div class="custom-control custom-switch">
+                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                                            <input onchange="changeStatus({{ $post->id }})" type="checkbox"
+                                                class="custom-control-input" id="{{ $post->id }}"
+                                                data-url="{{ route('admin.content.post.status', $post) }}" 
+                                                @if ($post->status == 1) checked @endif>
+                                            <label class="custom-control-label" for="{{ $post->id }}"></label>
+                                        </div>
 
                                     </td>
 
                                     <td>
-                                        <input onchange="changeCommentable({{ $post->id }})"
-                                            id="{{ $post->id }}-commentable" type="checkbox"
-                                            @if ($post->commentable == 1) checked @endif
-                                            data-url="{{ route('admin.content.post.commentable', $post) }}">
+                                            <div class="custom-control custom-switch">
+                                                <input onchange="changeCommentable({{ $post->id }})" type="checkbox"
+                                                    class="custom-control-input" id="{{ $post->id }}-commentable"
+                                                    data-url="{{ route('admin.content.post.commentable', $post) }}"
+                                                    @if ($post->commentable == 1) checked @endif>
+                                                <label class="custom-control-label" for="{{ $post->id }}-commentable"></label>
+                                            </div>
 
                                     </td>
 

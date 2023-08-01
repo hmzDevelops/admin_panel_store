@@ -70,3 +70,10 @@
 #select_tags::hover{
     border: 1px solid red !important;
 }
+
+
+
+input[type="checkbox"],
+input[type="checkbox"]+label{
+  cursor:pointer;
+  }

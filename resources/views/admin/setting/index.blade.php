@@ -39,19 +39,25 @@
                         <thead>
                             <tr>
                                 <th class="col-md-1">#</th>
-                                <th class="col-md-5">نام سایت</th>
-                                <th class="col-md-3">عنوان سایت</th>
-                                <th class="max-width-16-rem text-center col-md-3"><i class="fa fa-cogs"></i> تنظیمات</th>
+                                <th class="col-md-2">نام سایت</th>
+                                <th class="col-md-3">توضیحات</th>
+                                <th class="col-md-2">کلمات کلیدی</th>
+                                <th class="col-md-1">لوگو</th>
+                                <th class="col-md-1">آیکون</th>
+                                <th class="max-width-16-rem text-center col-md-2"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
                                 <th>1</th>
-                                <td>فروشگاه من</td>
-                                <td>فروشگاه من</td>
+                                <td>{{ $setting->title }}</td>
+                                <td>{{ $setting->description }}</td>
+                                <td>{{ $setting->keywords }}</td>
+                                <td><img  width="60" height="60" src="{{ asset($setting->logo) }}" alt="image"></td>
+                                <td><img  width="60" height="60" src="{{ asset($setting->icon) }}" alt="image"></td>
                                 <td class="width-16-rem text-center">
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                    <a href="{{ route('admin.setting.edit', $setting->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
                                     <button disabled class="btn btn-danger btn-sm " type="submit"><i class="fa fa-trash-alt"></i>
                                         حذف</button>
                                 </td>

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin\setting;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Setting\Setting;
+use Database\Seeders\SettingSeeder;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\Setting\SettingRequest;
+use App\Http\Services\Image\ImageService;
 
 class SettingController extends Controller
 {
@@ -12,7 +16,13 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('admin.setting.index');
+        $setting = Setting::first();
+        if ($setting == null) {
+            $defulat = new SettingSeeder();
+            $defulat->run();
+            $setting = Setting::first();
+        }
+        return view('admin.setting.index', compact('setting'));
     }
 
     /**
@@ -42,17 +52,58 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Setting $setting)
     {
-        //
+        return view('admin.setting.edit', compact('setting'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SettingRequest $request, Setting $setting, ImageService $imageService)
     {
-        //
+        $inputs = $request->all();
+
+        if ($request->hasFile('logo')) {
+
+            //delete old image
+            if (!empty($setting->logo)) {
+                $result = $imageService->deleteDirectoryAndFiles($setting->logo);
+            }
+
+            //save new image
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'setting');
+            $imageService->setImageName('logo');
+            $result = $imageService->save($request->file('logo'));
+
+            if (!$result) {
+                return redirect()->route('admin.setting.index')->with('toast-error', 'آپلود لوگو دچار مشکل شد!');
+            }
+
+            $inputs['logo'] = $result;
+        }
+
+        if ($request->hasFile('icon')) {
+
+            //delete old image
+            if (!empty($setting->icon)) {
+                $result = $imageService->deleteDirectoryAndFiles($setting->logo);
+            }
+
+            //save new image
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'setting');
+            $imageService->setImageName('icon');
+            $result = $imageService->save($request->file('icon'));
+
+            if (!$result) {
+                return redirect()->route('admin.setting.index')->with('toast-error', 'آپلود آیکون دچار مشکل شد!');
+            }
+
+            $inputs['icon'] = $result;
+        }
+
+        $setting->update($inputs);
+        return redirect()->route('admin.setting.index')->with('swal-success', 'ویرایش موفقیت آمیز بود');
     }
 
     /**

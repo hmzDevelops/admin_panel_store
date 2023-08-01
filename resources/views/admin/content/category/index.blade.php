@@ -81,12 +81,15 @@
                                     <td><img  width="80" height="80" src="{{ asset($postCategory->image['indexArray'][$postCategory->image['currentImage']] ) }}" alt="image"></td>
                                     <td>{{ $postCategory->tags }}</td>
                                     <td>
-                                        <input onchange="changeStatus({{ $postCategory->id }})"
-                                            id="{{ $postCategory->id }}" type="checkbox"
-                                            @if ($postCategory->status == 1) checked @endif
-                                            data-url="{{ route('admin.content.category.status', $postCategory) }}">
-
                                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                                        <div class="custom-control custom-switch">
+                                            <input onchange="changeStatus({{ $postCategory->id }})" type="checkbox"
+                                                class="custom-control-input" id="{{ $postCategory->id }}"
+                                                data-url="{{ route('admin.content.category.status', $postCategory) }}" 
+                                                @if ($postCategory->status == 1) checked @endif>
+                                            <label class="custom-control-label" for="{{ $postCategory->id }}"></label>
+                                        </div>
 
                                     </td>
                                     <td class="width-16-rem text-center">

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('public_mail_id')->constrained('public_mail')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('file_path');
             $table->bigInteger('file_size');
-            $table->string('title');
+            $table->string('file_type');
+            $table->tinyInteger('file_location')->default(1)->comment('1 => public_path, 1 => storage_path');
             $table->tinyInteger('status')->default(0)->comment('0 => unactive, 1 => active');
             $table->timestamps();
             $table->softDeletes();

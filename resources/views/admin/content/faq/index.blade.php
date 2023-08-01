@@ -70,10 +70,15 @@
                                     <td>{{  Str::limit($faq->question, $limit = 50, $end = '...') }} </td>
                                     <td>{{ Str::limit($faq->answer, $limit = 30, $end = '...') }}</td>
                                     <td>
-                                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                                        <input onchange="changeStatus({{ $faq->id }})" id="{{ $faq->id }}" type="checkbox"
-                                            @if ($faq->status == 1) checked @endif
-                                            data-url="{{ route('admin.content.faq.status', $faq) }}">
+                                        <div class="custom-control custom-switch">
+                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                                            <input onchange="changeStatus({{ $faq->id }})" type="checkbox"
+                                                class="custom-control-input" id="{{ $faq->id }}"
+                                                data-url="{{ route('admin.content.faq.status', $faq) }}"
+                                                @if ($faq->status == 1) checked @endif>
+                                            <label class="custom-control-label" for="{{ $faq->id }}"></label>
+                                        </div>
 
                                     </td>
                                     <td class="width-16-rem text-center">

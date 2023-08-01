@@ -2,6 +2,7 @@
 
 namespace App\Models\Content;
 
+use App\Models\Content\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,8 +24,15 @@ class Post extends Model
     }
 
 
+    //رابطه تعلق داشتن پست به کدام دسته
     public function category(){
         return $this->belongsTo(PostCategory::class, 'category_id');
+    }
+
+
+    //رابطه چند به چند با جدول کامنت
+    public function comments(){
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
 }

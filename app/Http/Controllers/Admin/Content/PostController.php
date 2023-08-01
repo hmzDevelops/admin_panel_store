@@ -57,7 +57,7 @@ class PostController extends Controller
 
 
 
-        $inputs['auther_id'] = 1;
+        $inputs['auther_id'] = 2;
         $post = Post::create($inputs);
         return redirect()->route('admin.content.post.index')->with('toast-success', 'پست جدید شما با موفقیت ثبت گردید');
     }
