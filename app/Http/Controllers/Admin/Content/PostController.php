@@ -49,7 +49,7 @@ class PostController extends Controller
             $result = $imageService->createIndexAndSave($request->file('image'));
 
             if (!$result) {
-                return redirect()->route('admin.content.post.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.content.post.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['image'] = $result;
@@ -59,7 +59,7 @@ class PostController extends Controller
 
         $inputs['auther_id'] = 2;
         $post = Post::create($inputs);
-        return redirect()->route('admin.content.post.index')->with('toast-success', 'پست جدید شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.post.index')->with('swal-success', 'پست جدید شما با موفقیت ثبت گردید');
     }
 
     /**

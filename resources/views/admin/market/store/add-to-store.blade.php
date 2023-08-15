@@ -3,7 +3,7 @@
 
 
 @section('page-title')
-    <title>{{ config('constants.page_title.add_store'); }}</title>
+    <title>{{ config('constants.page_title.add_store') }}</title>
 @endsection
 
 
@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه </a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">بخش فروش</a></li>
-            <li class="breadcrumb-item font-size-12"> <a href="#"> انبار  </a></li>
+            <li class="breadcrumb-item font-size-12"> <a href="#"> انبار </a></li>
             <li class="breadcrumb-item font-size-12 active" aria-current="page"> اضافه کردن به انبار </li>
         </ol>
     </nav>
@@ -33,27 +33,52 @@
 
                 <section>
 
-                    <form action="" method="">
+                    <form action="{{ route('admin.market.store.store', $product) }}" method="post">
+                        @csrf
+
                         <section class="row">
 
                             <section class="col-12 col-md-4 form-group">
-                                <label class="font-weight-bold" for="">نام تحویل گیرنده</label>
-                                <input type="text" name="" id="" class="form-control form-control-sm">
+                                <label class="font-weight-bold" for="reciver">نام تحویل گیرنده</label>
+                                <input type="text" name="reciver" value="{{ old('reciver') }}"
+                                    class="form-control form-control-sm">
+                                @error('reciver')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 col-md-4 form-group">
-                                <label class="font-weight-bold" for="">نام تحویل دهنده</label>
-                                <input type="text" name="" id="" class="form-control form-control-sm">
+                                <label class="font-weight-bold" for="deliver">نام تحویل دهنده</label>
+                                <input type="text" name="deliver" value="{{ old('deliver') }}"
+                                    class="form-control form-control-sm">
+                                @error('deliver')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 col-md-4 form-group">
-                                <label class="font-weight-bold" for="">تعداد</label>
-                                <input type="text" name="" id="" class="form-control form-control-sm">
+                                <label class="font-weight-bold" for="marketable_number">تعداد</label>
+                                <input type="text" name="marketable_number" value="{{ old('marketable_number') }}"
+                                    class="form-control form-control-sm">
+                                @error('marketable_number')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 form-group">
-                                <label class="font-weight-bold" for="">تعداد</label>
-                                <textarea name="" rows="4" class="form-control form-control-sm"></textarea>
+                                <label class="font-weight-bold" for="description">توضیحات</label>
+                                <textarea name="description" rows="4" class="form-control form-control-sm">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
 
 

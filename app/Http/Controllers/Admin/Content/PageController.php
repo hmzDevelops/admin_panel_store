@@ -38,7 +38,7 @@ class PageController extends Controller
 
         $inputs['slug'] = null;
         $post = Page::create($inputs);
-        return redirect()->route('admin.content.page.index')->with('toast-success', 'صفحه جدید شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.page.index')->with('swal-success', 'صفحه جدید شما با موفقیت ثبت گردید');
     }
 
     /**

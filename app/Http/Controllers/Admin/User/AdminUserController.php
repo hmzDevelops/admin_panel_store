@@ -44,7 +44,7 @@ class AdminUserController extends Controller
             $result = $imageService->save($request->file('profile_photo_path'));
 
             if (!$result) {
-                return redirect()->route('admin.user.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.user.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['profile_photo_path'] = $result;
@@ -53,7 +53,7 @@ class AdminUserController extends Controller
         $inputs['user_type'] = 1;
         $inputs['password'] = Hash::make($request->password);
         $user = User::create($inputs);
-        return redirect()->route('admin.user.index')->with('toast-success', ' ادمین جدید شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.user.index')->with('swal-success', ' ادمین جدید شما با موفقیت ثبت گردید');
     }
 
     /**
@@ -92,7 +92,7 @@ class AdminUserController extends Controller
 
 
             if (!$result) {
-                return redirect()->route('admin.user.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.user.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['profile_photo_path'] = $result;

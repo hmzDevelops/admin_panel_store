@@ -71,7 +71,7 @@ class TicketController extends Controller
 
 
         Ticket::create($inputs);
-        return redirect()->route('admin.ticket.index')->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.ticket.index')->with('swal-success', 'پاسخ شما با موفقیت ثبت گردید');
      }
 
 

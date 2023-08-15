@@ -38,7 +38,7 @@ class FAQController extends Controller
         $inputs = $request->all();
 
         $faq = FAQ::create($inputs);
-        return redirect()->route('admin.content.faq.index')->with('toast-success', ' سوال جدید با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.faq.index')->with('swal-success', ' سوال جدید با موفقیت ثبت گردید');
     }
 
     /**

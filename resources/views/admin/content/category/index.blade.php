@@ -2,6 +2,117 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('style/components/sweetalert2/sweetalert2.v.11.7.18.min.css') }}">
+
+    {{-- image modal style --}}
+    <style>
+        .myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .myImg:hover {
+            opacity: 0.7;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 100000;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image */
+        .caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation */
+        .modal-content,
+        .caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
 @endsection
 
 @section('page-title')
@@ -78,7 +189,22 @@
                                     <td>{{ $postCategory->name }}</td>
                                     <td>{{ $postCategory->description }}</td>
                                     <td>{{ $postCategory->slug }}</td>
-                                    <td><img  width="80" height="80" src="{{ asset($postCategory->image['indexArray'][$postCategory->image['currentImage']] ) }}" alt="image"></td>
+
+                                    <td>
+
+                                        <img onclick="runImageModal({{ $loop->iteration }})" id="{{ $loop->iteration }}-myImg" width="80" height="80"
+                                            src="{{ asset($postCategory->image['indexArray'][$postCategory->image['currentImage']]) }}"
+                                            alt="{{ $postCategory->name }}" class="myImg">
+
+                                        <!-- The Modal -->
+
+                                        <div id="{{ $loop->iteration }}-myModal" class="modal myModal">
+                                            <span class="close">&times;</span>
+                                            <img id="{{ $loop->iteration }}-imgModal" class="modal-content imgModal">
+                                            <div id="{{ $loop->iteration }}-caption" class="caption"></div>
+                                        </div>
+
+                                    </td>
                                     <td>{{ $postCategory->tags }}</td>
                                     <td>
                                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -86,7 +212,7 @@
                                         <div class="custom-control custom-switch">
                                             <input onchange="changeStatus({{ $postCategory->id }})" type="checkbox"
                                                 class="custom-control-input" id="{{ $postCategory->id }}"
-                                                data-url="{{ route('admin.content.category.status', $postCategory) }}" 
+                                                data-url="{{ route('admin.content.category.status', $postCategory) }}"
                                                 @if ($postCategory->status == 1) checked @endif>
                                             <label class="custom-control-label" for="{{ $postCategory->id }}"></label>
                                         </div>
@@ -119,8 +245,6 @@
             </section>
         </section>
     </section>
-
-
 @endsection
 
 
@@ -129,12 +253,8 @@
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.all.min.js') }}"></script>
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.min.js') }}"></script>
 
-@endsection
+    <script src="{{ asset('script/all.js') }}"></script>
 
-
-@section('ajax')
-
-<script src="{{ asset('script/all.js') }}"></script>
     {{-- AJAX STATUS --}}
     <script text="type/javascript">
         function changeStatus(id) {
@@ -152,10 +272,10 @@
                     if (response.status) {
                         if (response.checked) {
                             element.prop('checked', true);
-                             successToast('وضعیت فعال شد');
+                            successToast('وضعیت فعال شد');
                         } else {
                             element.prop('checked', false);
-                             infoToast('وضعیت غیر فعال شد');
+                            infoToast('وضعیت غیر فعال شد');
                         }
                     } else {
                         element.prop('checked', elementValue);
@@ -170,8 +290,8 @@
         }
     </script>
 
-      {{-- confirm delete--}}
-      <script>
+    {{-- confirm delete --}}
+    <script>
         $(function() {
             $(".delete").on("click", function(e) {
 
@@ -195,9 +315,36 @@
             });
         });
     </script>
+
+
+    {{-- image modal --}}
+    <script>
+
+        function runImageModal(id) {
+
+            // Get the modal
+            var modal = document.getElementById(id + "-myModal");
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById(id + "-myImg");
+            var modalImg = document.getElementById(id + "-imgModal");
+            var captionText = document.getElementById(id + "-caption");
+
+
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            modal.onclick = function() {
+                modal.style.display = "none";
+            }
+
+        }
+
+    </script>
 @endsection
-
-
-
-
-

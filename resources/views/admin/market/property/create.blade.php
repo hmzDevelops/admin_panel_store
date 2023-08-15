@@ -3,7 +3,7 @@
 
 
 @section('page-title')
-    <title>{{ config('constants.page_title.create_property'); }}</title>
+    <title>{{ config('constants.page_title.create_property') }}</title>
 @endsection
 
 
@@ -33,21 +33,52 @@
 
                 <section>
 
-                    <form action="" method="">
+                    <form action="{{ route('admin.market.property.store') }}" method="post">
+                        @csrf
+
                         <section class="row">
 
                             <section class="col-12 col-md-6 form-group">
-                                <label class="font-weight-bold" for="">نام فرم</label>
-                                <input type="text" name="" id="" class="form-control form-control-sm">
+                                <label class="font-weight-bold" for="name">نام فرم</label>
+                                <input type="text" name="name" value="{{ old('name') }}"
+                                    class="form-control form-control-sm">
+                                @error('name')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 col-md-6 form-group">
-                                <label class="font-weight-bold" for="">فرم والد</label>
-                                <select name="" id="" class="form-control form-control-sm">
-                                    <option value="">فرم یک</option>
-                                    <option value="">فرم دو</option>
-                                </select>
+                                <label class="font-weight-bold" for="unit">واحد اندازی گیری</label>
+                                <input type="text" name="unit" value="{{ old('unit') }}"
+                                    class="form-control form-control-sm">
+                                @error('unit')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </section>
+
+
+                            <section class="col-12  form-group">
+                                <label class="font-weight-bold" for="category_id">انتخاب دسته</label>
+                                <select name="category_id" id="category_id" class="form-control form-control-sm">
+                                    @foreach ($productCategorys as $productCategory)
+                                        <option value="{{ $productCategory->id }}"
+                                            @if (old('category_id') == $productCategory->id) selected @endif>{{ $productCategory->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('category_id')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </section>
+
+
 
 
                             <section class="col-12">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Market\Payment;
 use App\Models\Ticket\Ticket;
 use App\Models\Ticket\TicketAdmin;
 use Laravel\Sanctum\HasApiTokens;
@@ -86,5 +87,16 @@ class User extends Authenticatable
     //تعداد تیکت های هر یوزر
     public function tickets(){
         return $this->hasMany(Ticket::class, 'parent_id');
+    }
+
+
+    //هر یوزر چندین نقش دارد
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    //هر یوزر چندین پیمنت دارد
+    public function payments(){
+        return $this->hasMany(Payment::class);
     }
 }

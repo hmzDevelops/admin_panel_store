@@ -1,18 +1,21 @@
 @extends('admin.layouts.master')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('style/components/sweetalert2/sweetalert2.v.11.7.18.min.css') }}">
+@endsection
+
+
 @section('page-title')
-    <title>{{ config('constants.page_title.role_index'); }}</title>
+    <title>{{ config('constants.page_title.role_index') }}</title>
 @endsection
 
 
 @section('content')
-
-
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه </a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">بخش کاربران</a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> نقش ها   </li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> نقش ها </li>
         </ol>
     </nav>
 
@@ -22,9 +25,23 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                           نقش ها
+                        نقش ها
                     </h5>
                 </section>
+
+                
+                   {{-- ADLERT --}}
+                {{-- ****************************************************************************** --}}
+                <section class="toast-wrapper flex-row-reverse">
+                    @include('components.alerts.toast.success')
+                    @include('components.alerts.toast.error')
+                </section>
+
+                @include('components.alerts.sweetalert2.success')
+                @include('components.alerts.sweetalert2.error')
+
+                {{-- ****************************************************************************** --}}
+
 
                 <section class="d-flex justify-content-between align-content-center mt-4 mb-3">
                     <a href="{{ route('admin.user.role.create') }}" class="btn btn-info btn-sm">ایجاد نقش جدید</a>
@@ -38,7 +55,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th class="col-md-1">#</th>
+                                <th class="">#</th>
                                 <th class="col-md-4">نام نقش</th>
                                 <th class="col-md-4">دسترسی ها</th>
                                 <th class="max-width-16-rem text-center col-md-3"><i class="fa fa-cogs"></i> تنظیمات</th>
@@ -46,21 +63,80 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>پشتیبان فروش</td>
-                                <td>1- مشاهده سفارشات <br> 2-مشاهده پرداخت ها<br> 3-مشاهده تخفیف ها</td>
-                                <td class="width-16-rem text-center">
-                                    <a href="#" class="btn btn-success btn-sm"><i class="fa fa-user-graduate"></i>دسترسی ها</a>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
-                                        حذف</button>
-                                </td>
-                            </tr>
+
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <th>{{ $loop->iteration }}</th>
+                                    <td>{{ $role->name }}</td>
+                                    <td>
+                                        @if (empty(
+                                                $role->permissions()->get()->toArray()
+                                            ))
+                                            <span class="text-danger">برای این نقش سطح دسترسی تعریف نشده است</span>
+                                        @else
+                                            <ul>
+                                                @foreach ($role->permissions as $permission)
+                                                    <li>{{ $permission->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </td>
+                                    <td class="width-16-rem text-center">
+                                        <a href="{{ route('admin.user.role.permission.forn', $role) }}" class="btn btn-success btn-sm"><i
+                                                class="fa fa-user-graduate"></i>دسترسی ها</a>
+                                        <a href="{{ route('admin.user.role.edit', $role) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
+                                            ویرایش</a>
+                                            <form class="d-inline" action="{{ route('admin.user.role.destroy', $role) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-sm delete">
+                                                <i class="fa fa-trash-alt"></i>
+                                                حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </section>
             </section>
         </section>
     </section>
+@endsection
+
+{{-- load sweetalert2 js --}}
+@section('script')
+    <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.all.min.js') }}"></script>
+    <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.min.js') }}"></script>
+
+@endsection
+
+@section('ajax')
+      {{-- confirm delete --}}
+      <script>
+        $(function() {
+            $(".delete").on("click", function(e) {
+
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "آیا نسبت به حذف مطمئن هستید؟",
+                    showDenyButton: true,
+                    icon: "info",
+                    confirmButtonText: "بله",
+                    denyButtonText: "خیر",
+                    confirmButtonColor: "#28A745",
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        $(this).parent().submit();
+                    } else if (result.isDenied) {
+                        //
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

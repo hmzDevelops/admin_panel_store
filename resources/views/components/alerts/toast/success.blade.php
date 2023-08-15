@@ -9,11 +9,11 @@
         </section>
     </section>
 
-    @section('script')
+    @push('ajax')
         <script>
             $(document).ready(function() {
                 $('.toast').toast('show');
             });
         </script>
-    @endsection
+    @endpush
 @endif

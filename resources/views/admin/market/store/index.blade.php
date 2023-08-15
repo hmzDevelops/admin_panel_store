@@ -1,13 +1,11 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    <title>{{ config('constants.page_title.store'); }}</title>
+    <title>{{ config('constants.page_title.store') }}</title>
 @endsection
 
 
 @section('content')
-
-
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه </a></li>
@@ -22,7 +20,7 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                          انبار
+                        انبار
                     </h5>
                 </section>
 
@@ -38,30 +36,39 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th class="col-md-1">#</th>
-                                <th class="col-md-2">نام کالا</th>
-                                <th class="col-md-2">تصویر کالا</th>
-                                <th class="col-md-2">موجودی</th>
-                                <th class="col-md-1">ورودی انبار</th>
-                                <th class="col-md-1">خروجی انبار</th>
-                                <th class="max-width-16-rem text-center col-md-3"><i class="fa fa-cogs"></i> تنظیمات</th>
+                                <th >#</th>
+                                <th class="col-md-4">نام کالا</th>
+                                <th class="col-md-1">تصویر کالا</th>
+                                <th class="col-md-1">تعداد قابل فروش</th>
+                                <th class="col-md-1">تعداد رزرو شده</th>
+                                <th class="col-md-2">تعداد فروخته شده</th>
+                                <th class="max-width-16-rem text-center col-md-2"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>تلویزیون سامسونگ</td>
-                                <td><img class="w-25" src="{{ asset('admin-assets/images/avatar-3.jpg') }}" alt="kala"></td>
-                                <td>50</td>
-                                <td>38</td>
-                                <td>22</td>
-                                <td class="width-16-rem text-center">
-                                    <a href="{{ route('admin.market.store.addToStore') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> افزایش موجودی</a>
-                                    <button class="btn btn-warning btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
-                                        اصلاح موجودی</button>
-                                </td>
-                            </tr>
+
+                            @foreach ($products as $product)
+                                <tr>
+                                    <th>{{ $loop->iteration }}</th>
+                                    <td>{{ $product->name }}</td>
+                                    <td><img width="50" height="50"
+                                        src="{{ asset($product->image['indexArray'][$product->image['currentImage']]) }}"
+                                        alt="{{ $product->name }}">
+                                    </td>
+                                    <td>{{ $product->marketable_number }}</td>
+                                    <td>{{ $product->frozen_number }}</td>
+                                    <td>{{ $product->sold_number }}</td>
+                                    <td class="width-16-rem text-center">
+                                        <a href="{{ route('admin.market.store.addToStore', $product) }}"
+                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> افزایش موجودی</a>
+
+                                            <a href="{{ route('admin.market.store.edit', $product) }}"
+                                            class="btn btn-warning btn-sm"><i class="fa fa-trash-alt"></i> اصلاح موجودی</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </section>

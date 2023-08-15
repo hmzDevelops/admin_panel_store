@@ -75,7 +75,7 @@
 
                                             <input onchange="changeStatus({{ $menu->id }})" type="checkbox"
                                                 class="custom-control-input" id="{{ $menu->id }}"
-                                                data-url="{{ route('admin.content.menu.status', $menu) }}" 
+                                                data-url="{{ route('admin.content.menu.status', $menu) }}"
                                                 @if ($menu->status == 1) checked @endif>
                                             <label class="custom-control-label" for="{{ $menu->id }}"></label>
                                         </div>
@@ -111,10 +111,7 @@
 @section('script')
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.all.min.js') }}"></script>
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.min.js') }}"></script>
-@endsection
 
-
-@section('ajax')
     <script src="{{ asset('script/all.js') }}"></script>
 
     {{-- AJAX STATUS --}}

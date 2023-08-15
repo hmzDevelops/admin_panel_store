@@ -39,7 +39,7 @@
     @yield('script')
 
     {{-- add ajax  --}}
-    @yield('ajax')
+    @stack('ajax')
 
 </body>
 

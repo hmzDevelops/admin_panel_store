@@ -41,7 +41,8 @@
 
                             <section class="col-6 form-group">
                                 <label class="font-weight-bold" for="name">نام منو</label>
-                                <input value="{{ old('name') }}" type="text" name="name" id="name" class="form-control form-control-sm">
+                                <input value="{{ old('name') }}" type="text" name="name" id="name"
+                                    class="form-control form-control-sm">
                                 @error('name')
                                     <span class="alert alert-danger invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -59,16 +60,17 @@
                                 </select>
 
                                 @error('parent_id')
-                                <span class="alert alert-danger invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
                             </section>
 
                             <section class="col-6 form-group">
                                 <label class="font-weight-bold" for="url">آدرس url</label>
-                                <input value="{{ old('url') }}" type="text" name="url" id="url" class="form-control form-control-sm">
+                                <input value="{{ old('url') }}" type="text" name="url" id="url"
+                                    class="form-control form-control-sm">
                                 @error('url')
                                     <span class="alert alert-danger invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>

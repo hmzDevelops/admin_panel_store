@@ -115,72 +115,67 @@
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.all.min.js') }}"></script>
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.min.js') }}"></script>
 
-@endsection
+        {{-- confirm delete --}}
+        <script>
+            $(function() {
+                $(".delete").on("click", function(e) {
 
-@section('ajax')
-    {{-- confirm delete --}}
-    <script>
-        $(function() {
-            $(".delete").on("click", function(e) {
+                    e.preventDefault();
 
-                e.preventDefault();
-
-                Swal.fire({
-                    title: "آیا نسبت به حذف مطمئن هستید؟",
-                    showDenyButton: true,
-                    icon: "info",
-                    confirmButtonText: "بله",
-                    denyButtonText: "خیر",
-                    confirmButtonColor: "#28A745",
-                }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        $(this).parent().submit();
-                    } else if (result.isDenied) {
-                        //
-                    }
+                    Swal.fire({
+                        title: "آیا نسبت به حذف مطمئن هستید؟",
+                        showDenyButton: true,
+                        icon: "info",
+                        confirmButtonText: "بله",
+                        denyButtonText: "خیر",
+                        confirmButtonColor: "#28A745",
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            $(this).parent().submit();
+                        } else if (result.isDenied) {
+                            //
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
 
-<script src="{{ asset('script/all.js') }}"></script>
-{{-- AJAX STATUS --}}
-<script text="type/javascript">
-    function changeStatus(id) {
-        var element = $('#' + id);
-        var ajaxUrl = element.attr('data-url');
-        var elementValue = !element.prop('checked');
+    <script src="{{ asset('script/all.js') }}"></script>
+    {{-- AJAX STATUS --}}
+    <script text="type/javascript">
+        function changeStatus(id) {
+            var element = $('#' + id);
+            var ajaxUrl = element.attr('data-url');
+            var elementValue = !element.prop('checked');
 
-        $.ajax({
-            url: ajaxUrl,
-            type: 'post',
-            data: {
-                "_token": $('#token').val(),
-            },
-            success: function(response) {
-                if (response.status) {
-                    if (response.checked) {
-                        element.prop('checked', true);
-                        successToast('وضعیت فعال شد');
+            $.ajax({
+                url: ajaxUrl,
+                type: 'post',
+                data: {
+                    "_token": $('#token').val(),
+                },
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            element.prop('checked', true);
+                            successToast('وضعیت فعال شد');
+                        } else {
+                            element.prop('checked', false);
+                            warningToast('وضعیت غیر فعال شد');
+                        }
                     } else {
-                        element.prop('checked', false);
-                        warningToast('وضعیت غیر فعال شد');
+                        element.prop('checked', elementValue);
+                        errorToast('مجددا تلاش نمایید');
                     }
-                } else {
+                },
+                error: function(response) {
                     element.prop('checked', elementValue);
-                    errorToast('مجددا تلاش نمایید');
+                    errorToast('خطای سرور');
                 }
-            },
-            error: function(response) {
-                element.prop('checked', elementValue);
-                errorToast('خطای سرور');
-            }
-        });
-    }
+            });
+        }
 
-</script>
-
-
+    </script>
 @endsection

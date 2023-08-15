@@ -4,10 +4,11 @@ namespace App\Http\Controllers\admin\setting;
 
 use Illuminate\Http\Request;
 use App\Models\Setting\Setting;
+use Illuminate\Support\Facades\DB;
 use Database\Seeders\SettingSeeder;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\Setting\SettingRequest;
 use App\Http\Services\Image\ImageService;
+use App\Http\Requests\admin\Setting\SettingRequest;
 
 class SettingController extends Controller
 {
@@ -112,5 +113,34 @@ class SettingController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function refreshDB()
+    {
+        $tableNames = DB::select('SHOW TABLES');
+        return view('admin.setting.tables', compact('tableNames'));
+    }
+
+
+
+
+    public function resetAutoIncrement(Request $request)
+    {
+
+        $messages = [
+            'table.required' => 'فیلد  نام جدول اجبار است',
+        ];
+
+        $validateData = $request->validate([
+            'table' => 'required|max:50',
+        ], $messages);
+
+
+        $table = $request['table'];
+        DB::statement("ALTER TABLE $table AUTO_INCREMENT = 0");
+        return redirect()->route('admin.setting.refresh')->with('toast-success', 'جدول مورد نظر شما رفرش شد');
+
+
+
     }
 }

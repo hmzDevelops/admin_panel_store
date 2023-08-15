@@ -6,6 +6,11 @@ use Morilog\Jalali\Jalalian;
         return Jalalian::forge($date)->format($format); // جمعه، 23 اسفند 97
     }
 
-    //define helpers in composer.hson
+
+    function unset_session($key){
+         session()->forget($key);
+    }
+
+    //define helpers in composer.json
     //composer dump-autoload => command line for excute helpers
 ?>

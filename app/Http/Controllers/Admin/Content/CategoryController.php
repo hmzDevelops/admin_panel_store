@@ -51,12 +51,12 @@ class CategoryController extends Controller
         }
 
         if (!$result) {
-            return redirect()->route('admin.content.category.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+            return redirect()->route('admin.content.category.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
         }
 
         $inputs['image'] = $result;
         $postCategory = PostCategory::create($inputs);
-        return redirect()->route('admin.content.category.index')->with('toast-success', 'دسته بندی جدید شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.category.index')->with('swal-success', 'دسته بندی جدید شما با موفقیت ثبت گردید');
     }
 
 
@@ -96,7 +96,7 @@ class CategoryController extends Controller
             $result = $imageService->createIndexAndSave($request->file('image'));
 
             if (!$result) {
-                return redirect()->route('admin.content.category.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.content.category.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['image'] = $result;

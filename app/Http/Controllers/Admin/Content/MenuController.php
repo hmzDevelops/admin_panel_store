@@ -35,7 +35,7 @@ class MenuController extends Controller
         $inputs = $request->all();
 
         $menu = Menu::create($inputs);
-        return redirect()->route('admin.content.menu.index')->with('toast-success', 'منوی شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.menu.index')->with('swal-success', 'منوی شما با موفقیت ثبت گردید');
     }
 
     /**

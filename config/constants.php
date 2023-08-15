@@ -3,12 +3,15 @@
 return [
     'page_title' => [
         'create_brand' => 'ایجاد برند',
+        'edit_brand' => 'ویرایش برند',
         'brand' => 'برندها',
         'create_category' => 'ایجاد دسته بندی',
+        'edit_category' => 'ویرایش دسته بندی',
         'category' => 'دسته بندی',
         'comment' => 'نظرات',
         'show_comment' => 'نمایش نظر',
         'create_delivery' => 'ایجاد روش ارسال',
+        'edit_delivery' => 'ویرایش روش ارسال',
         'delivery' => 'روش های ارسال',
         'create_amazing_discount' => 'ایجاد فروش شگفت انگیز',
         'sale_amazing' => 'فروش شگفت انگیز',
@@ -20,8 +23,11 @@ return [
         'payment' => 'پرداخت ها',
         'product' => 'کالاها',
         'create_product' => 'ایجاد کالا',
+        'edit_product' => 'ویرایش کالا',
+        'form_property' => 'ویژگی فرم کالا',
         'property' => 'فرم کالا',
         'create_property' => 'ایجاد فرم کالا',
+        'edit_property' => 'ویرایش فرم کالا',
         'store' => 'انبار',
         'add_store' => 'اضافه کردن به انبار',
         'faq_index' => 'سوالات متداول',
@@ -44,6 +50,8 @@ return [
         'customer_user_edit' => 'ویرایش مشتری جدید',
         'role_index' => 'نقش ها',
         'role_create' => 'ایجاد نقش ',
+        'role_edit' => 'ویرایش نقش ',
+        'role_permission' => 'دسترسی های نقش ',
         'email_index' => 'اطلاعیه ایمیل',
         'email_create' => 'ایجاد ایمیل',
         'email_edit' => 'ویرایش ایمیل',
@@ -64,6 +72,10 @@ return [
         'public_email_file' => 'فایلهای ایمیل',
         'email_file_create' => 'ایجاد فایل اطلاعیه ایمیلی',
         'email_file_edit' => 'ویرایش فایل اطلاعیه ایمیلی',
+        'product_color_index' => 'رنگ محصولات',
+        'product_color_create' => 'ایجاد رنگ',
+        'product_gallery_index' => 'تصاویر محصول',
+        'product_gallery_create' => 'ایجاد تصویر',
     ]
 ];
 

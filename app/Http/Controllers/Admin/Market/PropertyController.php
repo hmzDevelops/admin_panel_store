@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin\market;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Market\Product;
+use App\Http\Controllers\Controller;
+use App\Models\Market\ProductCategory;
+use App\Models\Market\CategoryAttribute;
 
 class PropertyController extends Controller
 {
@@ -12,7 +15,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('admin.market.property.index');
+        $category_attributes = CategoryAttribute::all();
+        return view('admin.market.property.index',compact('category_attributes'));
     }
 
     /**
@@ -20,7 +24,8 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.market.property.create');
+        $productCategorys = ProductCategory::all();
+        return view('admin.market.property.create',compact('productCategorys'));
     }
 
     /**
@@ -28,7 +33,15 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|max:120|min:1|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
+            'unit' => 'required|max:120|min:1|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
+            'category_id' => 'required|min:1|regex:/^[0-9]+$/u|exists:product_categories,id',
+        ]);
+
+        $inputs = $request->all();
+        $category_attribute =  CategoryAttribute::create($inputs);
+        return redirect()->route('admin.market.property.index')->with('swal-success', ' فرم جدید شما با موفقیت ثبت گردید');
     }
 
     /**
@@ -36,30 +49,40 @@ class PropertyController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CategoryAttribute $category_attribute)
     {
-        //
+        $productCategorys = ProductCategory::all();
+        return view('admin.market.property.edit',compact('category_attribute','productCategorys'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,CategoryAttribute $category_attribute)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|max:120|min:1|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
+            'unit' => 'required|max:120|min:1|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
+            'category_id' => 'required|min:1|regex:/^[0-9]+$/u|exists:product_categories,id',
+        ]);
+
+        $inputs = $request->all();
+        $category_attribute->update($inputs);
+        return redirect()->route('admin.market.property.index')->with('swal-success', ' ویرایش فرم  شما با موفقیت ثبت گردید');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CategoryAttribute $category_attribute)
     {
-        //
+        $result = $category_attribute->delete();
+        return redirect()->route('admin.market.property.index')->with('swal-success', 'فرم مورد نظر شما حذف گردید');
     }
 }

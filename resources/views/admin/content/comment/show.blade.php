@@ -47,7 +47,7 @@
                 @if ($comment->parent_id == null)
                     <section>
 
-                        <form action="{{ route('admin.content.comment.answer', $comment->id) }}" method="post">
+                        <form action="{{ route('admin.content.comment.answer', $comment) }}" method="post">
                             @csrf
                             <section class="row">
 
@@ -57,16 +57,11 @@
                                 </section>
 
 
-                                <input type="hidden" value="1" name="seen">
-
                                 <section class="col-12">
                                     <button type="submit" class="btn btn-primary btn-sm">ثبت</button>
                                 </section>
                             </section>
-
-
                         </form>
-
                     </section>
                 @endif
 

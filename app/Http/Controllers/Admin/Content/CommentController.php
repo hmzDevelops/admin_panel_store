@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\content;
 
 use Illuminate\Http\Request;
 use App\Models\Content\Comment;
+use App\Models\Market\Delivery;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\content\CommentRequest;
 
@@ -14,7 +15,12 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('created_at', 'DESC')->simplePaginate(5);
+        $unSeenComments = Comment::where('commentable_type', 'App\Models\Content\Post')->where('seen', 0)->get();
+        foreach ($unSeenComments as $comment) {
+            $comment->seen  = 1;
+            $comment->save();
+        }
+        $comments = Comment::orderBy('created_at', 'DESC')->where('commentable_type', 'App\Models\Content\Post')->simplePaginate(5);
         return view('admin.content.comment.index', compact('comments'));
     }
 
@@ -37,10 +43,9 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        $comment->seen = 1;
-        $comment->save();
         return view('admin.content.comment.show', compact('comment'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -61,10 +66,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id)
     {
         //
     }
+
 
     public function status(Comment $comment)
     {
@@ -115,6 +122,6 @@ class CommentController extends Controller
 
 
         $comment = Comment::create($inputs);
-        return redirect()->route('admin.content.comment.index')->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.content.comment.index')->with('swal-success', 'پاسخ شما با موفقیت ثبت گردید');
     }
 }

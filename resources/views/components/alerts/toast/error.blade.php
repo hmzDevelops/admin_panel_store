@@ -10,13 +10,13 @@
         </section>
     </section>
 
-    @section('script')
-       
+    @push('script')
+
 
         <script>
             $(document).ready(function() {
                 $('.toast').toast('show');
             });
         </script>
-    @endsection
+    @endpush
 @endif

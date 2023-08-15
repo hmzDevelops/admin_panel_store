@@ -34,7 +34,7 @@ return new class extends Migration
             $table->longText('common_discount_object')->nullable();
             $table->decimal('order_common_discount_amount',20,3)->nullable();
             $table->decimal('order_total_products_discount_amount',20,3)->nullable();
-            $table->tinyInteger('ordeer_status')->default(0)->comment('0 => order unactive, 1 => order active');
+            $table->tinyInteger('order_status')->default(0)->comment('0 => order unactive, 1 => order active');
             $table->tinyInteger('status')->default(0)->comment('0 => unactive, 1 => active');
             $table->timestamps();
             $table->softDeletes();

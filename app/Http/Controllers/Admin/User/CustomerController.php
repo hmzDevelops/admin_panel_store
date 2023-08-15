@@ -42,7 +42,7 @@ class CustomerController extends Controller
             $result = $imageService->save($request->file('profile_photo_path'));
 
             if (!$result) {
-                return redirect()->route('admin.user.customer.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.user.customer.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['profile_photo_path'] = $result;
@@ -51,7 +51,7 @@ class CustomerController extends Controller
         $inputs['user_type'] = 0;
         $inputs['password'] = Hash::make($request->password);
         $user = User::create($inputs);
-        return redirect()->route('admin.user.customer.index')->with('toast-success', ' مشتری جدید شما با موفقیت ثبت گردید');
+        return redirect()->route('admin.user.customer.index')->with('swal-success', ' مشتری جدید شما با موفقیت ثبت گردید');
     }
 
     /**
@@ -90,7 +90,7 @@ class CustomerController extends Controller
 
 
             if (!$result) {
-                return redirect()->route('admin.user.customer.index')->with('toast-error', 'آپلود تصویر دچار مشکل شد!');
+                return redirect()->route('admin.user.customer.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
             }
 
             $inputs['profile_photo_path'] = $result;
