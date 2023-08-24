@@ -17,8 +17,8 @@ class CustomerController extends Controller
     public function index()
     {
         $users = User::withTrashed()
-        ->where('user_type', 0)
-        ->get();
+            ->where('user_type', 0)
+            ->get();
         return view('admin.user.customer.index', compact('users'));
     }
 
@@ -59,7 +59,6 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-
     }
 
     /**
@@ -105,11 +104,20 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $result = $user->delete();
-        return redirect()->route('admin.user.customer.index')->with('swal-success', 'مشتری  مورد نظر شما حذف گردید');
+
+        $result = User::where(['deleted_at' =>  null, 'id' => $id])->count();
+
+        if ($result == 0) {
+            User::withTrashed()->find($id)->restore();
+            return redirect()->route('admin.user.customer.index')->with('swal-success', 'مشتری  مورد نظر شما  بازیابی شد');
+        } else {
+            $result = User::find($id)->delete();
+            return redirect()->route('admin.user.customer.index')->with('swal-success', 'مشتری  مورد نظر شما حذف گردید');
+        }
     }
+
 
     public function changeActive(User $user)
     {

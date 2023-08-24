@@ -118,6 +118,8 @@ class PostController extends Controller
         }
 
 
+        $inputs['slug'] = null;
+        
         $post->update($inputs);
         return redirect()->route('admin.content.post.index')->with('swal-success', 'ویرایش موفقیت آمیز بود');
     }

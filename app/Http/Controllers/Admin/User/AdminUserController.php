@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\NewUserRegistered;
 use App\Http\Services\Image\ImageService;
 use App\Http\Services\Upload\FileService;
 use Symfony\Component\Console\Input\Input;
@@ -53,6 +54,16 @@ class AdminUserController extends Controller
         $inputs['user_type'] = 1;
         $inputs['password'] = Hash::make($request->password);
         $user = User::create($inputs);
+
+         // NOTIFICATIONS
+        // **********************************************************************
+        $details = [
+            'message' => 'یک کاربر جدید در سایت ثبت نام کرد',
+        ];
+        $adminUser = User::find(3);
+        $adminUser->notify(new NewUserRegistered($details));
+        // **********************************************************************
+
         return redirect()->route('admin.user.index')->with('swal-success', ' ادمین جدید شما با موفقیت ثبت گردید');
     }
 

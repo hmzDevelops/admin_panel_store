@@ -77,3 +77,45 @@ input[type="checkbox"],
 input[type="checkbox"]+label{
   cursor:pointer;
   }
+
+
+  .font-size-5{
+    font-size: 5px;
+  }
+
+  .font-size-10{
+    font-size: 10px;
+  }
+
+  .font-size-15{
+    font-size: 15px;
+  }
+
+  .font-size-20{
+    font-size: 20px;
+  }
+
+  .font-size-25{
+    font-size: 25px;
+  }
+
+
+  .font-size-30{
+    font-size: 30px;
+  }
+
+  .font-size-35{
+    font-size: 35px;
+  }
+
+  .font-size-40{
+    font-size: 40px;
+  }
+
+  .font-size-45{
+    font-size: 45px;
+  }
+
+  .font-size-50{
+    font-size: 50px;
+  }

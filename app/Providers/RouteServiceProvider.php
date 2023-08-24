@@ -28,6 +28,19 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        //محدود کردن آدرس ها به ازای درخواست ها در هر 5 دقیقه
+        RateLimiter::for('customer-login-register-limiter', function (Request $request) {
+            return Limit::perMinute(5)->by($request->ip());
+        });
+
+        RateLimiter::for('customer-login-confirm-limiter', function (Request $request) {
+            return Limit::perMinute(5)->by(url()->current() . $request->ip());
+        });
+
+        RateLimiter::for('customer-login-resend-otp-limiter', function (Request $request) {
+            return Limit::perMinute(5)->by(url()->current() . $request->ip());
+        });
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
@@ -37,4 +50,5 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
 }

@@ -111,15 +111,24 @@
 
                                     <td class="width-16-rem text-center">
                                         <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>نقش</a>
-                                        <a href="{{ route('admin.user.customer.edit', $user) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
+                                        <a href="{{ route('admin.user.customer.edit', $user) }}"
+                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
                                             ویرایش</a>
-                                            <form class="d-inline" action="{{ route('admin.user.customer.destroy', $user) }}"
+                                        <form class="d-inline" action="{{ route('admin.user.customer.destroy', $user) }}"
                                             method="post">
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger btn-sm delete">
-                                                <i class="fa fa-trash-alt"></i>
-                                                حذف</button>
+                                            <button
+                                                class="btn @if ($user->deleted_at == null) btn-danger @else btn-info @endif btn-sm delete">
+                                                @if ($user->deleted_at == null)
+                                                    <i class="fa fa-trash-alt"></i>
+                                                    حذف
+                                                @else
+                                                    <i class="fa fa-undo"></i>
+                                                    بازیابی
+                                                @endif
+                                            </button>
                                         </form>
                                     </td>
 
@@ -137,15 +146,11 @@
 @section('script')
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.all.min.js') }}"></script>
     <script src="{{ asset('script/components/sweetalert2/sweetalert2.v.11.7.18.min.js') }}"></script>
-@endsection
 
-
-@section('ajax')
     <script src="{{ asset('script/all.js') }}"></script>
     {{-- AJAX STATUS --}}
 
     <script text="type/javascript">
-
         function changeActivation(id) {
             var element = $('#' + id);
             var ajaxUrl = element.attr('data-url');
@@ -216,12 +221,13 @@
     {{-- confirm delete --}}
     <script>
         $(function() {
+
             $(".delete").on("click", function(e) {
 
                 e.preventDefault();
 
                 Swal.fire({
-                    title: "آیا نسبت به حذف مطمئن هستید؟",
+                    title: "آیا نسبت به تغییر وضعیت مطمئن هستید؟",
                     showDenyButton: true,
                     icon: "info",
                     confirmButtonText: "بله",
@@ -235,7 +241,11 @@
                         //
                     }
                 });
+
+
             });
+
         });
+
     </script>
 @endsection

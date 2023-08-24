@@ -52,9 +52,14 @@ class OrderController extends Controller
     }
 
 
-    public function show()
+    public function show(Order $order)
     {
-        return view('admin.market.order.index');
+        return view('admin.market.order.show', compact('order'));
+    }
+
+
+    public function detail(Order $order){
+        return view('admin.market.order.detail', compact('order'));
     }
 
 

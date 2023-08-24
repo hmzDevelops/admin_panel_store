@@ -40,7 +40,7 @@ class PostRequest extends FormRequest
                 'title' => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
                 'summary' => 'required|max:400|min:5',
                 'category_id' => 'required|min:1|regex:/^[0-9]+$/u|exists:post_categories,id',
-                'image' => 'required|image|mimes:png,jpg,jpeg,gif',
+                'image' => 'image|mimes:png,jpg,jpeg,gif',
                 'status' => 'required|numeric|in:0,1',
                 'tags' => 'required|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
                 'body' => 'required|max:400|min:5',
