@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use App\Models\Market\Brand;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Market\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Services\Image\ImageService;
-use App\Http\Requests\admin\Market\ProductRequest;
+use App\Http\Requests\Admin\Market\ProductRequest;
 
 class ProductController extends Controller
 {

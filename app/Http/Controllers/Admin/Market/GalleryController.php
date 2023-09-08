@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use Illuminate\Http\Request;
 use App\Models\Market\Product;

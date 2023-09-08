@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use Illuminate\Http\Request;
 use App\Models\Market\Product;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\Market\StoreRequest;
+use App\Http\Requests\Admin\Market\StoreRequest;
 
 class StoreController extends Controller
 {

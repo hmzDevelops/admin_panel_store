@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 use App\Models\Market\ProductCategory;
 use App\Http\Services\Image\ImageService;
 use App\Http\Services\Image\ImageCacheService;
-use App\Http\Requests\admin\Market\ProductCategoryRequest;
+use App\Http\Requests\Admin\Market\ProductCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -39,16 +39,21 @@ class CategoryController extends Controller
     {
 
         $inputs = $request->all();
+
         if ($request->hasFile('image')) {
             $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'product-category');
             $result = $imageService->createIndexAndSave($request->file('image'));
+
+            if (!$result) {
+                return redirect()->route('admin.market.category.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
+            }
+
+            $inputs['image'] = $result;
         }
 
-        if (!$result) {
-            return redirect()->route('admin.market.category.index')->with('swal-error', 'آپلود تصویر دچار مشکل شد!');
-        }
 
-        $inputs['image'] = $result;
+
+
         $productCategory = ProductCategory::create($inputs);
         return redirect()->route('admin.market.category.index')->with('swal-success', 'دسته بندی جدید شما با موفقیت ثبت گردید');
     }

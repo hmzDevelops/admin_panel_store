@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use Illuminate\Http\Request;
 use App\Models\Market\Delivery;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\Market\DeliveryRequest;
+use App\Http\Requests\Admin\Market\DeliveryRequest;
 
 class DeliveryController extends Controller
 {

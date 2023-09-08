@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\admin\User;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;

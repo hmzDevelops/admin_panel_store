@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\setting;
+namespace App\Http\Controllers\Admin\Setting;
 
 use Illuminate\Http\Request;
 use App\Models\Setting\Setting;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Database\Seeders\SettingSeeder;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
-use App\Http\Requests\admin\Setting\SettingRequest;
+use App\Http\Requests\Admin\Setting\SettingRequest;
 
 class SettingController extends Controller
 {

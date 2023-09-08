@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\notify;
+namespace App\Http\Controllers\Admin\Notify;
 
 use App\Models\Notify\SMS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\notify\SMSRequest;
+use App\Http\Requests\Admin\Notify\SMSRequest;
 
 class SMSController extends Controller
 {

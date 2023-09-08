@@ -300,6 +300,10 @@ button:hover {
         width: 100%;
         z-index: 1;
     }
+
+    .sidebar-header{
+        flex: none;
+    }
 }
 
 .info-box-body h5 {

@@ -89,7 +89,7 @@
         }
 
         /* The Close Button */
-        .close {
+        .closeModal {
             position: absolute;
             top: 15px;
             right: 35px;
@@ -99,8 +99,8 @@
             transition: 0.3s;
         }
 
-        .close:hover,
-        .close:focus {
+        .closeModal:hover,
+        .closeModal:focus {
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
@@ -113,6 +113,8 @@
             }
         }
     </style>
+
+    
 @endsection
 
 @section('page-title')
@@ -199,7 +201,7 @@
                                         <!-- The Modal -->
 
                                         <div id="{{ $loop->iteration }}-myModal" class="modal myModal">
-                                            <span class="close">&times;</span>
+                                            <span class="closeModal">&times;</span>
                                             <img id="{{ $loop->iteration }}-imgModal" class="modal-content imgModal">
                                             <div id="{{ $loop->iteration }}-caption" class="caption"></div>
                                         </div>

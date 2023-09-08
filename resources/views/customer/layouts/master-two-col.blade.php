@@ -1,12 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="fa" dir="rtl">
 
 <head>
 
-
     @include('customer.layouts.head-tag')
     @yield('head-tag')
-
 
 </head>
 

@@ -8,8 +8,8 @@
                 <section class="d-md-flex justify-content-md-between align-items-md-center py-3">
 
                     <section class="d-flex justify-content-between align-items-center d-md-block">
-                        <a class="text-decoration-none" href="index.html"><img src="assets/images/logo/8.png"
-                                alt="logo"></a>
+                        <a class="text-decoration-none" href="https://jutemoon.ir"><img
+                                src="{{ asset('customer-assets/images/logo/8.png') }}" alt="logo"></a>
                         <button class="btn btn-link text-dark d-md-none" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                             <i class="fa fa-bars me-1"></i>
@@ -72,11 +72,21 @@
                             </section>
                         @endauth
 
-                        @guest
-                            <a href="{{ route('auth.customer.login-register-form') }}" class="btn btn-link text-decoration-none text-dark profile-button">
+                        @if (isset(Auth::user()->user_type) && Auth::user()->user_type == 1)
+                            <a href="{{ route('admin.home') }}"
+                                class="btn btn-link text-decoration-none text-dark profile-button">
                                 <i class="fa fa-user-lock"></i>
                             </a>
+                        @endif
+
+                        @guest
+                            <a href="{{ route('auth.customer.login-register-form') }}"
+                                class="btn btn-link text-decoration-none text-dark profile-button">
+                                <i class="fa fa-user"></i>
+                            </a>
                         @endguest
+
+
 
                         <section class="header-cart d-inline ps-3 border-start position-relative">
                             <a class="btn btn-link position-relative text-dark header-cart-link"
@@ -87,7 +97,7 @@
                             <section class="header-cart-dropdown">
                                 <section class="border-bottom d-flex justify-content-between p-2">
                                     <span class="text-muted">2 کالا</span>
-                                    <a class="text-decoration-none text-info" href="cart.html">مشاهده سبد خرید </a>
+                                    <a class="text-decoration-none text-info" href="{{ route('customer.sales-process.cart') }}">مشاهده سبد خرید </a>
                                 </section>
                                 <section class="header-cart-dropdown-body">
 

@@ -6,7 +6,7 @@
             @csrf
 
             @include('errors.form_error')
-            
+
             <section class="login-wrapper mb-5">
                 <section class="login-logo">
                     <img src="{{ asset('customer-assets/images/logo/4.png') }}" alt="">
@@ -39,11 +39,13 @@
 @section('script')
     <script>
         $('#btnLogin').on('click', function() {
+            $('#loading').fadeIn();
             $('#loading').css('display', 'flex');
         });
 
         $('#loading').on('click', function() {
-            $(this).hide();
+            $(this).fadeOut()
+            // $(this).hide();
         });
 
     </script>

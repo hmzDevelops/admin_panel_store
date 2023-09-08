@@ -49,6 +49,17 @@
                                 @enderror
                             </section>
 
+                            <section class="col-12 col-md-6 form-group">
+                                <label class="font-weight-bold" for="color">رنگ</label>
+                                <input value="{{ old('color') }}" type="color" name="color" id="color"
+                                    class="form-control form-control-sm">
+                                @error('color')
+                                    <span class="alert alert-danger invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </section>
+
 
 
 

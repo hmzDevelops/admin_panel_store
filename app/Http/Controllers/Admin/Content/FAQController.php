@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use App\Models\Content\FAQ;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
-use App\Http\Requests\admin\content\FAQRequest;
+use App\Http\Requests\Admin\Content\FAQRequest;
 use App\Http\Services\Image\ImageToolsService;
 
 class FAQController extends Controller

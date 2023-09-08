@@ -143,6 +143,7 @@
 
 
     <script src="{{ asset('script/all.js') }}"></script>
+    
     {{-- AJAX STATUS --}}
     <script text="type/javascript">
         function changeStatus(id) {

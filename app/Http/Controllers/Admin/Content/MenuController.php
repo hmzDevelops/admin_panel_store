@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use App\Models\Content\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\content\MenuRequest;
+use App\Http\Requests\Admin\Content\MenuRequest;
 
 class MenuController extends Controller
 {

@@ -2,41 +2,46 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\admin\user\RoleController;
-use App\Http\Controllers\admin\notify\SMSController;
-use App\Http\Controllers\admin\content\FAQController;
-use App\Http\Controllers\admin\content\MenuController;
-use App\Http\Controllers\admin\content\PageController;
-use App\Http\Controllers\admin\content\PostController;
-use App\Http\Controllers\admin\market\BrandController;
-use App\Http\Controllers\admin\market\OrderController;
-use App\Http\Controllers\admin\market\StoreController;
-use App\Http\Controllers\admin\notify\EmailController;
-use App\Http\Controllers\admin\ticket\TicketController;
+use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Admin\User\RoleController;
+use App\Http\Controllers\Admin\Notify\SMSController;
+use App\Http\Controllers\Admin\Content\FAQController;
+use App\Http\Controllers\Admin\Content\MenuController;
+use App\Http\Controllers\Admin\Content\PageController;
+use App\Http\Controllers\Admin\Content\PostController;
+use App\Http\Controllers\Admin\Market\BrandController;
+use App\Http\Controllers\Admin\Market\OrderController;
+use App\Http\Controllers\Admin\Market\StoreController;
+use App\Http\Controllers\Admin\Notify\EmailController;
 
-use App\Http\Controllers\admin\user\CustomerController;
+use App\Http\Controllers\Admin\Ticket\TicketController;
+use App\Http\Controllers\Admin\User\CustomerController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\admin\market\CommentController;
-use App\Http\Controllers\admin\market\GalleryController;
-use App\Http\Controllers\admin\market\PaymentController;
-use App\Http\Controllers\admin\market\ProductController;
-use App\Http\Controllers\admin\user\AdminUserController;
+use App\Http\Controllers\Admin\Content\BannerController;
+use App\Http\Controllers\Admin\Market\CommentController;
+use App\Http\Controllers\Admin\Market\GalleryController;
+use App\Http\Controllers\Admin\Market\PaymentController;
+use App\Http\Controllers\Admin\Market\ProductController;
+use App\Http\Controllers\Admin\User\AdminUserController;
 use App\Http\Controllers\Admin\Market\CategoryController;
-use App\Http\Controllers\admin\market\DeliveryController;
-use App\Http\Controllers\admin\market\DiscountController;
-use App\Http\Controllers\admin\market\PropertyController;
-use App\Http\Controllers\admin\setting\SettingController;
-use App\Http\Controllers\admin\user\PermissionController;
-use App\Http\Controllers\admin\notify\EmailFileController;
-use App\Http\Controllers\admin\Ticket\TicketAdminController;
-use App\Http\Controllers\admin\market\ProductColorController;
-use App\Http\Controllers\Admin\notify\NotificationController;
-use App\Http\Controllers\admin\market\PropertyValueController;
-use App\Http\Controllers\admin\Ticket\TicketCategoryController;
-use App\Http\Controllers\admin\Ticket\TicketPriorityController;
-use App\Http\Controllers\Auth\customer\LoginRegisterController;
-use App\Http\Controllers\admin\content\CommentController as ContentCommentController;
-use App\Http\Controllers\admin\content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Admin\Market\DeliveryController;
+use App\Http\Controllers\Admin\Market\DiscountController;
+use App\Http\Controllers\Admin\Market\PropertyController;
+use App\Http\Controllers\Admin\Setting\SettingController;
+use App\Http\Controllers\Admin\User\PermissionController;
+use App\Http\Controllers\Admin\Notify\EmailFileController;
+use App\Http\Controllers\Admin\Market\GuaaranteeController;
+use App\Http\Controllers\Admin\Ticket\TicketAdminController;
+use App\Http\Controllers\Admin\Market\ProductColorController;
+use App\Http\Controllers\Admin\Notify\NotificationController;
+use App\Http\Controllers\Admin\Market\PropertyValueController;
+use App\Http\Controllers\Customer\SalesProcess\CartController;
+use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
+use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
+use App\Http\Controllers\Auth\Customer\LoginRegisterController;
+use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
+use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\Market\ProductController as CustomerProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +59,6 @@ use App\Http\Controllers\admin\content\CategoryController as ContentCategoryCont
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-
 // *********************************************************************************************************************
 //MARKET
 Route::prefix('admin')->namespace('Admin')->group(function () {
@@ -193,6 +197,15 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/gallery/create/{product}', [GalleryController::class, 'create'])->name('admin.market.gallery.create');
             Route::post('/gallery/store/{product}', [GalleryController::class, 'store'])->name('admin.market.gallery.store');
             Route::delete('/gallery/destroy/{product}/{productGallery}', [GalleryController::class, 'destroy'])->name('admin.market.gallery.destroy');
+
+
+            //GUARANTEE
+            Route::get('/guarantee/{product}', [GuaaranteeController::class, 'index'])->name('admin.market.guarantee.index');
+            Route::get('/guarantee/create/{product}', [GuaaranteeController::class, 'create'])->name('admin.market.guarantee.create');
+            Route::post('/guarantee/store/{product}', [GuaaranteeController::class, 'store'])->name('admin.market.guarantee.store');
+            Route::delete('/guarantee/destroy/{product}/{guarantee}', [GuaaranteeController::class, 'destroy'])->name('admin.market.guarantee.destroy');
+
+
         });
 
 
@@ -310,6 +323,18 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::delete('/destroy/{post}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
             Route::post('/status/{post}', [PostController::class, 'status'])->name('admin.content.post.status');
             Route::post('/commentable/{post}', [PostController::class, 'commentable'])->name('admin.content.post.commentable');
+        });
+
+
+        Route::prefix('banner')->group(function(){
+            Route::get('/', [BannerController::class, 'index'])->name('admin.content.banner.index');
+            Route::get('/create', [BannerController::class, 'create'])->name('admin.content.banner.create');
+            Route::post('/store', [BannerController::class, 'store'])->name('admin.content.banner.store');
+            Route::get('/edit/{banner}', [BannerController::class, 'edit'])->name('admin.content.banner.edit');
+            Route::put('/update/{banner}', [BannerController::class, 'update'])->name('admin.content.banner.update');
+            Route::delete('/destroy/{banner}', [BannerController::class, 'destroy'])->name('admin.content.banner.destroy');
+            Route::post('/status/{banner}', [BannerController::class, 'status'])->name('admin.content.banner.status');
+
         });
     });
 
@@ -485,14 +510,37 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::post('/notification/read-all', [NotificationController::class, 'readAll'])->name('admin.notification.readAll');
 });
 
+
+
 // *********************************************************************************************************************
 
-// CUSTOMER ROUTE
 
+
+// CUSTOMER ROUTE
 //customer-home-page
-Route::get('/', function () {
-    return view('customer.home');
-})->name('customer.home');
+Route::get('/', [HomeController::class, 'home'])->name('customer.home');
+
+
+Route::namespace('SalesProcess')->group(function(){
+
+    Route::get('/cart', [CartController::class, 'cart'])->name('customer.sales-process.cart');
+    Route::post('/cart', [CartController::class, 'updateCart'])->name('customer.sales-process.update-cart');
+    Route::post('/add-to-cart/{product:slug}', [CartController::class, 'addToCart'])->name('customer.sales-process.add-to-cart');
+    Route::post('/remove-from-cart/{cartItem}', [CartController::class, 'removeFromCart'])->name('customer.sales-process.remove-from-cart');
+
+});
+
+
+//market
+Route::namespace('Market')->group(function(){
+
+    Route::get('/product/{product:slug}', [CustomerProductController::class, 'product'])->name('customer.market.product');
+    Route::post('/add-comment/product/{product:slug}', [CustomerProductController::class, 'addComment'])->name('customer.market.add-comment');
+    Route::get('/add-to-favorite/product/{product:slug}', [CustomerProductController::class, 'addToFavorite'])->name('customer.market.add-to-favorite');
+
+});
+
+
 
 
 //login-register

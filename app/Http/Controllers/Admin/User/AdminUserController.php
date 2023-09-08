@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\user;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use App\Notifications\NewUserRegistered;
 use App\Http\Services\Image\ImageService;
 use App\Http\Services\Upload\FileService;
 use Symfony\Component\Console\Input\Input;
-use App\Http\Requests\admin\User\AdminUserRequest;
+use App\Http\Requests\Admin\User\AdminUserRequest;
 
 class AdminUserController extends Controller
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin\user;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Services\Image\ImageService;
-use App\Http\Requests\admin\User\CustomerRequest;
+use App\Http\Requests\Admin\User\CustomerRequest;
 
 class CustomerController extends Controller
 {

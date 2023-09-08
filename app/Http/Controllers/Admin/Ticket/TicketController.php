@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\ticket;
+namespace App\Http\Controllers\Admin\Ticket;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket\Ticket;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ticket\TicketRequest;
+use App\Http\Requests\Admin\Ticket\TicketRequest;
 
 class TicketController extends Controller
 {

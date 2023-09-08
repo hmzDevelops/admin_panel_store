@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\notify;
+namespace App\Http\Controllers\Admin\Notify;
 
 use FilesystemIterator;
 use App\Models\Notify\Email;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Notify\EmailFile;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Upload\FileService;
-use App\Http\Requests\admin\Notify\EmailFileRequest;
+use App\Http\Requests\Admin\Notify\EmailFileRequest;
 
 class EmailFileController extends Controller
 {

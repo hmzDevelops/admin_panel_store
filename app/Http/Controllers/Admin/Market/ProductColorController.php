@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use Illuminate\Http\Request;
 use App\Models\Market\Product;
@@ -31,7 +31,8 @@ class ProductColorController extends Controller
     public function store(Product $product, Request $request)
     {
         $validate = $request->validate([
-            'color_name' => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء., ]+$/u',
+            'color_name' => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء.,آ ]+$/u',
+            'color' => 'required|max:120',
             'price_increase' => 'required|numeric',
         ]);
 

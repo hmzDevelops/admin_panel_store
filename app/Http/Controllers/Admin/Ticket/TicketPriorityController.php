@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\Ticket;
+namespace App\Http\Controllers\Admin\Ticket;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketPriority;
-use App\Http\Requests\admin\Ticket\TicketPriorityRequest;
+use App\Http\Requests\Admin\Ticket\TicketPriorityRequest;
 
 class TicketPriorityController extends Controller
 {

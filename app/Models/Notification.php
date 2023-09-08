@@ -12,4 +12,5 @@ class Notification extends Model
     protected $guarded = ['id'];
     protected $casts = ['data' => 'array'];
 
+    //ایجاد پیغام پس از ساختن کاربر جدید
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use App\Models\Content\Page;
 use App\Models\Content\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\content\PageRequest;
+use App\Http\Requests\Admin\Content\PageRequest;
 
 class PageController extends Controller
 {

@@ -58,8 +58,8 @@
                                 <th class="col-md-1">مشاهده نظر</th>
                                 <th class="col-md-1">کد کاربر</th>
                                 <th class="col-md-2">نویسنده نظر</th>
-                                <th class="col-md-1">کد پست</th>
-                                <th class="col-md-1">پست</th>
+                                <th class="col-md-1">کد محصول</th>
+                                <th class="col-md-1">محصول</th>
                                 <th class="col-md-1">وضعیت</th>
                                 <th class="max-width-16-rem text-center col-md-3"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
@@ -72,7 +72,7 @@
                                     <td>{{ Str::limit($comment->body, 10) }}</td>
                                     <td>{{ $comment->parent_id ? Str::limit($comment->parent->body, 10) : 'نظر اصلی' }}</td>
                                     <td>
-                                        @if ($comment->seen)
+                                        @if ($comment->seen == 1)
                                             <i class="fa text-success fa-eye"></i>
                                         @else
                                             <i class="fa text-danger fa-eye-slash"></i>

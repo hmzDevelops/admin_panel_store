@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\user;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\user\RoleRequest;
+use App\Http\Requests\Admin\User\RoleRequest;
 use App\Models\User\Permission;
 
 class RoleController extends Controller

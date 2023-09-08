@@ -2,9 +2,10 @@
 
 namespace App\Models\Market;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Market\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Guarantee extends Model
 {
@@ -12,5 +13,11 @@ class Guarantee extends Model
     use SoftDeletes;
 
     protected $table = "guarantees";
+    protected $fillable = ['name','product_id','price_increase','status'];
+
+
+    public function product(){
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 
 }

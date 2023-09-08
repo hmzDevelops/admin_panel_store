@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use App\Models\Content\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\content\PostRequest;
+use App\Http\Requests\Admin\Content\PostRequest;
 use App\Http\Services\Image\ImageService;
 use App\Models\Content\PostCategory;
 
@@ -119,7 +119,7 @@ class PostController extends Controller
 
 
         $inputs['slug'] = null;
-        
+
         $post->update($inputs);
         return redirect()->route('admin.content.post.index')->with('swal-success', 'ویرایش موفقیت آمیز بود');
     }

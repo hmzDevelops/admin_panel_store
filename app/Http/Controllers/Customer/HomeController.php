@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Customer;
+
+use App\Models\Market\Brand;
+use Illuminate\Http\Request;
+use App\Models\Content\Banner;
+use App\Models\Market\Product;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
+class HomeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function home()
+    {
+        Auth::loginUsingId(1);
+
+        $slideShowImages = Banner::where('position', 0)->where('status', 1)->get();
+        $topBanners = Banner::where('position', 1)->where('status', 1)->take(2)->get();
+        $middleBanners = Banner::where('position', 2)->where('status', 1)->take(2)->get();
+        $buttonBanner = Banner::where('position', 3)->where('status', 1)->first();
+
+        $brands = Brand::all();
+
+        $mostVisitedProducts = Product::latest()->take(10)->get();
+
+        $offerProducts =  Product::latest()->take(10)->get();
+
+        return view('customer.home', compact('slideShowImages', 'topBanners', 'middleBanners', 'buttonBanner', 'brands', 'mostVisitedProducts', 'offerProducts'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}

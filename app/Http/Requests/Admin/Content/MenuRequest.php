@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\admin\content;
+namespace App\Http\Requests\Admin\Content;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,7 +25,7 @@ class MenuRequest extends FormRequest
             //store
             return [
                 'name' => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء.,><\/;\n\r&؟?!" ]+$/u',
-                'url' => 'required|max:10000|min:5|regex:/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/u',
+                'url' => 'required|max:10000|min:5|regex:/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]].[a-zA-Z]{2,}$/u',
                 'status' => 'required|numeric|in:0,1',
                 'parent_id' => 'nullable|min:1|regex:/^[0-9]+$/u|exists:menus,id',
             ];
@@ -34,7 +34,7 @@ class MenuRequest extends FormRequest
             //update
             return [
                 'name' => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\ك-ي-ء.,><\/;\n\r&؟?!" ]+$/u',
-                'url' => 'required|max:10000|min:5|regex:/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/u',
+                'url' => 'required|max:10000|min:5|regex:/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]].[a-zA-Z]{2,}$/u',
                 'status' => 'required|numeric|in:0,1',
                 'parent_id' => 'nullable|min:1|regex:/^[0-9]+$/u|exists:menus,id',
             ];

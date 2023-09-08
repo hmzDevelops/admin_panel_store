@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use App\Models\User;
 use App\Models\Market\Copan;
@@ -10,9 +10,9 @@ use App\Models\Market\AmazingSale;
 use App\Http\Controllers\Controller;
 use App\Models\Market\CommonDiscount;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\admin\Market\CopanRequest;
-use App\Http\Requests\admin\Market\AmazingSaleRequest;
-use App\Http\Requests\admin\Market\CommonDiscountRequest;
+use App\Http\Requests\Admin\Market\CopanRequest;
+use App\Http\Requests\Admin\Market\AmazingSaleRequest;
+use App\Http\Requests\Admin\Market\CommonDiscountRequest;
 
 class DiscountController extends Controller
 {

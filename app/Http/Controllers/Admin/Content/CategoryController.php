@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

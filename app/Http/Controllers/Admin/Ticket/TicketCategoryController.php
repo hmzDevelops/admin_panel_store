@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin\Ticket;
+namespace App\Http\Controllers\Admin\Ticket;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\Ticket\TicketCategoryRequest;
+use App\Http\Requests\Admin\Ticket\TicketCategoryRequest;
 use App\Models\Ticket\TicketCategory;
 
 class TicketCategoryController extends Controller

@@ -254,7 +254,7 @@ $(document).ready(function() {
     $(window).scroll(function() {
         var windowpos = $(window).scrollTop();
 
-        if (windowpos >= pos.top) {
+        if (windowpos >= pos ) {
             s.addClass("stick");
         } else {
             s.removeClass("stick");
@@ -262,3 +262,14 @@ $(document).ready(function() {
     });
 });
 //end product introduction, features and comment
+
+
+function toPersianNumber(number) {
+    constPersianDigit = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    // add comma
+    number = new Intl.NumberFormat().format(number);
+    //conver persian
+    return number.toString().replace(/\d/g, x => constPersianDigit[x]);
+}
+
+

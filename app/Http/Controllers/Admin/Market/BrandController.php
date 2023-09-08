@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin\market;
+namespace App\Http\Controllers\Admin\Market;
 
 use App\Models\Market\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Session\Session;
-use App\Http\Requests\admin\Market\BrandRequest;
+use App\Http\Requests\Admin\Market\BrandRequest;
 
 class BrandController extends Controller
 {

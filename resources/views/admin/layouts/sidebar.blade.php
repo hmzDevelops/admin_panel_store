@@ -2,9 +2,14 @@
     <section class="sidebar-container">
         <section class="sidebar-wrapper">
 
+            <a href="{{ route('customer.home') }}" class="sidebar-link">
+                <i class="fas fa-home"></i>
+                <span>صفحه کاربر</span>
+            </a>
+
             <a href="{{ route('admin.home') }}" class="sidebar-link">
                 <i class="fas fa-home"></i>
-                <span>خانه</span>
+                <span>صفحه اصلی ادمین</span>
             </a>
 
 
@@ -122,6 +127,11 @@
             <a href="{{ route('admin.content.page.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
                 <span>پیج ساز</span>
+            </a>
+
+            <a href="{{ route('admin.content.banner.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>بنر ها</span>
             </a>
 
             {{-- ************************************************************************************************** --}}

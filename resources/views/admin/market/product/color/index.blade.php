@@ -58,13 +58,14 @@
                 </section>
 
                 <section class="table-responsive">
-                    <table class="table table-striped table-hover h-150">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th class="col-md-1">#</th>
-                                <th class="col-md-4">نام کالا</th>
+                                <th class="col-md-3">نام کالا</th>
                                 <th class="col-md-2">رنگ کالا</th>
-                                <th class="col-md-3">افزایش قیمت</th>
+                                <th class="col-md-2">رنگ</th>
+                                <th class="col-md-2">افزایش قیمت</th>
                                 <th class="max-width-16-rem text-center col-md-2"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
@@ -75,7 +76,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $productColor->color_name }}</td>
-                                    <td>{{ $productColor->price_increase }}</td>
+                                    <td><input type="color" value="{{ $productColor->color }}"> </td>
+                                    <td>{{ digitGroup($productColor->price_increase) }}</td>
                                     <td class="width-16-rem text-center">
 
                                         <form class="d-inline"

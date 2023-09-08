@@ -2,6 +2,11 @@
 
 namespace App\Models\Market;
 
+use App\Models\Content\Comment;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Market\Guarantee;
+use App\Models\Market\AmazingSale;
 use App\Models\Market\ProductGallery;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -28,7 +33,10 @@ class Product extends Model
     }
 
 
-
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
 
     public function category()
@@ -62,6 +70,36 @@ class Product extends Model
         return $this->hasMany(CategoryValue::class);
     }
 
+
+    public function guarantees()
+    {
+        return $this->hasMany(Guarantee::class);
+    }
+
+
+    public function amazingSales()
+    {
+        return $this->hasMany(AmazingSale::class, 'product_id');
+    }
+
+
+
+    //این متد جهت استفاده از تخفیف های شگفت انگیز استفاده می شود
+    public function activeAmazingSales()
+    {
+        return $this->amazingSales()->where('start_date', '<', Carbon::now())->where('end_date', '>', Carbon::now())->first();
+    }
+
+    //بدست آوردن با نظراتی که تائید شدند - رابطه چند ریختی است
+    public function activeComments()
+    {
+        return $this->comments()->where('approved', 1)->whereNull('parent_id')->get();
+    }
+
+    //رابطه چند به چند دو جدول یوزر و پروداکت - product_user
+    public function user(){
+        return $this->belongsToMany(User::class);
+    }
 
 
     public function getRouteKeyName()

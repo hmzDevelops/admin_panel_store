@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin\content;
+namespace App\Http\Controllers\Admin\Content;
 
 use Illuminate\Http\Request;
 use App\Models\Content\Comment;
 use App\Models\Market\Delivery;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\content\CommentRequest;
+use App\Http\Requests\Admin\Content\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -15,11 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $unSeenComments = Comment::where('commentable_type', 'App\Models\Content\Post')->where('seen', 0)->get();
-        foreach ($unSeenComments as $comment) {
-            $comment->seen  = 1;
-            $comment->save();
-        }
+
         $comments = Comment::orderBy('created_at', 'DESC')->where('commentable_type', 'App\Models\Content\Post')->simplePaginate(5);
         return view('admin.content.comment.index', compact('comments'));
     }
@@ -43,6 +39,10 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
+        $unSeenComments = Comment::where('commentable_type', 'App\Models\Content\Post')->where('id', $comment->id)->first();
+        $unSeenComments->seen  = 1;
+        $unSeenComments->save();
+
         return view('admin.content.comment.show', compact('comment'));
     }
 
@@ -92,6 +92,10 @@ class CommentController extends Controller
 
     public function approved(Comment $comment)
     {
+        $unSeenComments = Comment::where('commentable_type', 'App\Models\Content\Post')->where('id', $comment->id)->first();
+        $unSeenComments->seen  = 1;
+        $unSeenComments->save();
+        
         $comment->approved = $comment->approved == 0 ? 1 : 0;
         $result = $comment->save();
 

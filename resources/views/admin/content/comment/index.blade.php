@@ -73,7 +73,7 @@
                                     <td>{{ Str::limit($comment->body, 10) }}</td>
                                     <td>{{ $comment->parent_id ? Str::limit($comment->parent->body, 10) : 'نظر اصلی' }}</td>
                                     <td>
-                                        @if ($comment->seen)
+                                        @if ($comment->seen == 1)
                                             <i class="fa text-success fa-eye"></i>
                                         @else
                                             <i class="fa text-danger fa-eye-slash"></i>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\notify;
+namespace App\Http\Controllers\Admin\Notify;
 
 use App\Models\Notify\Email;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\notify\EmailRequest;
+use App\Http\Requests\Admin\Notify\EmailRequest;
 
 class EmailController extends Controller
 {
